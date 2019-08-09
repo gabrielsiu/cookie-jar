@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DA8F284A22FBCABE00B32254 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F284922FBCABE00B32254 /* AppDelegate.swift */; };
-		DA8F284C22FBCABE00B32254 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F284B22FBCABE00B32254 /* ViewController.swift */; };
+		DA8F284C22FBCABE00B32254 /* ToDoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F284B22FBCABE00B32254 /* ToDoListVC.swift */; };
 		DA8F285122FBCAC300B32254 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8F285022FBCAC300B32254 /* Assets.xcassets */; };
 		DA8F285422FBCAC300B32254 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8F285222FBCAC300B32254 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		DA8F284622FBCABE00B32254 /* cookie-jar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cookie-jar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8F284922FBCABE00B32254 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DA8F284B22FBCABE00B32254 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DA8F284B22FBCABE00B32254 /* ToDoListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListVC.swift; sourceTree = "<group>"; };
 		DA8F285022FBCAC300B32254 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA8F285322FBCAC300B32254 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA8F285522FBCAC300B32254 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,13 +52,21 @@
 		DA8F284822FBCABE00B32254 /* cookie-jar */ = {
 			isa = PBXGroup;
 			children = (
+				DA8F285B22FD0B1500B32254 /* Controller */,
 				DA8F284922FBCABE00B32254 /* AppDelegate.swift */,
-				DA8F284B22FBCABE00B32254 /* ViewController.swift */,
 				DA8F285022FBCAC300B32254 /* Assets.xcassets */,
 				DA8F285222FBCAC300B32254 /* LaunchScreen.storyboard */,
 				DA8F285522FBCAC300B32254 /* Info.plist */,
 			);
 			path = "cookie-jar";
+			sourceTree = "<group>";
+		};
+		DA8F285B22FD0B1500B32254 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DA8F284B22FBCABE00B32254 /* ToDoListVC.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,7 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA8F284C22FBCABE00B32254 /* ViewController.swift in Sources */,
+				DA8F284C22FBCABE00B32254 /* ToDoListVC.swift in Sources */,
 				DA8F284A22FBCABE00B32254 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
