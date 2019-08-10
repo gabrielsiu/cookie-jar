@@ -62,6 +62,18 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Active"
+        } else {
+            return "Completed"
+        }
+    }
+    
     
 }
 
