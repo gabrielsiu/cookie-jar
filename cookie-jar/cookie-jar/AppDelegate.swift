@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = ToDoListVC()
         self.window?.makeKeyAndVisible()
+        self.window?.tintColor = .brown
         return true
     }
 

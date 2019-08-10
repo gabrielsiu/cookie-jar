@@ -11,20 +11,30 @@ import UIKit
 class ToDoListVC: UIViewController {
 
     // MARK: Properties
-    var navBar: UINavigationBar = {
+    
+    private var pointsString: String = {
+        return "Testing"
+    }()
+    
+    private lazy var navBar: UINavigationBar = {
         let navBar = UINavigationBar()
         let navItem = UINavigationItem(title: "To-Do List")
         let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: #selector(addToDoItem))
+        let profileItem = UIBarButtonItem(title: pointsString, style: .plain, target: nil, action: #selector(presentProfilePopup))
         navItem.rightBarButtonItem = addItem
+        navItem.leftBarButtonItem = profileItem
         navBar.setItems([navItem], animated: false)
         return navBar
     }()
     
-    var tableView: UITableView = {
+    private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ToDoItemCell")
         return tableView
     }()
+    
+    
+    
     
     // MARK: Initialization
     override func viewDidLoad() {
@@ -40,12 +50,17 @@ class ToDoListVC: UIViewController {
     }
     
     private func setupLayout() {
-        navBar.setConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: tableView.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
-        tableView.setConstraints(top: navBar.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        navBar.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: tableView.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        tableView.setEdgeConstraints(top: navBar.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
     }
     
     // MARK:
     @objc func addToDoItem() {
+        let popup = AddToDoItemPopup()
+        self.view.addSubview(popup)
+    }
+    
+    @objc func presentProfilePopup() {
         
     }
 
@@ -75,14 +90,4 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-}
-
-extension UIView {
-    func setConstraints(top: NSLayoutYAxisAnchor, bottom: NSLayoutYAxisAnchor, leading: NSLayoutXAxisAnchor, trailing: NSLayoutXAxisAnchor, padding: UIEdgeInsets = .zero) {
-        translatesAutoresizingMaskIntoConstraints = false
-        topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true
-        bottomAnchor.constraint(equalTo: bottom, constant: padding.bottom).isActive = true
-        leadingAnchor.constraint(equalTo: leading, constant: padding.left).isActive = true
-        trailingAnchor.constraint(equalTo: trailing, constant: padding.right).isActive = true
-    }
 }
