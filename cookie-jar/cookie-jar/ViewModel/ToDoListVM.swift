@@ -15,6 +15,7 @@ class ToDoListVM {
     private var completedToDoList = [ToDoItem]()
     private let defaults = UserDefaults.standard
     
+    // MARK: Methods
     func createToDoItem(title: String, points: Int) {
         let newToDoItem = ToDoItem(title: title, points: points)
         toDoList.append(newToDoItem)
@@ -34,5 +35,13 @@ class ToDoListVM {
     
     func getCompletedToDoList() -> [ToDoItem] {
         return completedToDoList
+    }
+    
+    func getPointsString(numPoints: Int) -> String {
+        if numPoints == 1 {
+            return "\(numPoints) point"
+        } else {
+            return "\(numPoints) points"
+        }
     }
 }

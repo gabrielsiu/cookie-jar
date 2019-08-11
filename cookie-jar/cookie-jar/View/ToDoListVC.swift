@@ -11,7 +11,7 @@ import UIKit
 class ToDoListVC: UIViewController {
     
     // MARK: Properties
-    private let viewModel = ToDoListVM()
+    private let toDoListViewModel = ToDoListVM()
     private var pointsString: String = {
         return "Testing"
     }()
@@ -30,6 +30,7 @@ class ToDoListVC: UIViewController {
     private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ToDoItemCell")
+        tableView.endEditing(true)
         return tableView
     }()
     
@@ -52,20 +53,28 @@ class ToDoListVC: UIViewController {
     }
     
     @objc func presentProfilePopup() {
-        
+        tableView.reloadData()
     }
-
-
 }
 
-// MARK: - Extensions
+// MARK: - Delegate Methods
 extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return toDoListViewModel.getToDoList().count
+        } else {
+            return toDoListViewModel.getCompletedToDoList().count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let toDoItem = toDoListViewModel.getToDoList()[indexPath.row]
+        var cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        cell = UITableViewCell(style: .value1, reuseIdentifier: "ToDoItemCell")
+        cell.textLabel?.text = toDoItem.title
+        cell.detailTextLabel?.text = toDoListViewModel.getPointsString(numPoints: toDoItem.points)
+        cell.accessoryType = .none
+        return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -83,6 +92,6 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
 
 extension ToDoListVC: ToDoCreationDelegate {
     func createNewToDoItem(title: String, points: Int) {
-        viewModel.createToDoItem(title: title, points: points)
+        toDoListViewModel.createToDoItem(title: title, points: points)
     }
 }

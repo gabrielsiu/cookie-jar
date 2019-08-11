@@ -113,6 +113,7 @@ class AddToDoItemView: UIView {
     // MARK: Actions
     @objc private func addToDoButtonPressed() {
         toDoCreationDelegate.createNewToDoItem(title: toDoItemTextField.text ?? "", points: numPoints)
+        animateOut()
     }
     
     @objc private func onSegmentValueChanged(sender: UISegmentedControl) {
