@@ -1,5 +1,5 @@
 //
-//  AddToDoItemPopup.swift
+//  AddToDoItemView.swift
 //  cookie-jar
 //
 //  Created by Gabriel Siu on 2019-08-10.
@@ -8,9 +8,15 @@
 
 import UIKit
 
-class AddToDoItemPopup: UIView {
+protocol ToDoCreationDelegate {
+    func createNewToDoItem(title: String, points: Int)
+}
+
+class AddToDoItemView: UIView {
     
     // MARK: Properties
+    var toDoCreationDelegate: ToDoCreationDelegate!
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -46,13 +52,14 @@ class AddToDoItemPopup: UIView {
         return segmentedControl
     }()
     
-    private let okButton: UIButton = {
+    private let addToDoButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Add to-do", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 5
         button.layer.backgroundColor = UIColor.brown.cgColor
+        button.addTarget(nil, action: #selector(addToDoButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -65,7 +72,7 @@ class AddToDoItemPopup: UIView {
     }()
     
     private lazy var bottomStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [pointsLabel, pointsControl, okButton])
+        let stackView = UIStackView(arrangedSubviews: [pointsLabel, pointsControl, addToDoButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -101,6 +108,10 @@ class AddToDoItemPopup: UIView {
         }
     }
     
+    @objc private func addToDoButtonPressed() {
+        toDoCreationDelegate.createNewToDoItem(title: toDoItemTextField.text ?? "", points: <#T##Int#>)
+    }
+    
     // MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -110,8 +121,7 @@ class AddToDoItemPopup: UIView {
         self.frame = UIScreen.main.bounds
         
         self.addSubview(container)
-        container.addSubview(topStack)
-        container.addSubview(bottomStack)
+        [topStack, bottomStack].forEach { container.addSubview($0) }
         
         container.centerView(yAnchor: self.centerYAnchor, xAnchor: self.centerXAnchor)
         container.setSizeConstraints(size: nil, referenceHeight: self.heightAnchor, referenceWidth: self.widthAnchor, heightMultiplier: 0.4, widthMultiplier: 0.75)

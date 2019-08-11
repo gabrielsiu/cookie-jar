@@ -10,4 +10,12 @@ import Foundation
 
 class ToDoListVM {
     
+    // MARK: Properties
+    var toDoList = [ToDoItem]()
+    private let defaults = UserDefaults.standard
+    
+    func createToDoItem(title: String, points: Int) {
+        let newToDoItem = ToDoItem(title: title, points: points)
+        
+    }
 }

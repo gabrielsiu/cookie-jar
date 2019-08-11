@@ -1,5 +1,5 @@
 //
-//  SetConstraints.swift
+//  UIView+Constraints.swift
 //  cookie-jar
 //
 //  Created by Gabriel Siu on 2019-08-10.

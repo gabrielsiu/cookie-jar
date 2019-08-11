@@ -9,9 +9,9 @@
 import UIKit
 
 class ToDoListVC: UIViewController {
-
-    // MARK: Properties
     
+    // MARK: Properties
+    private let viewModel = ToDoListVM()
     private var pointsString: String = {
         return "Testing"
     }()
@@ -56,7 +56,7 @@ class ToDoListVC: UIViewController {
     
     // MARK:
     @objc func addToDoItem() {
-        let popup = AddToDoItemPopup()
+        let popup = AddToDoItemView()
         self.view.addSubview(popup)
     }
     
@@ -88,6 +88,4 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
             return "Completed"
         }
     }
-    
-    
 }
