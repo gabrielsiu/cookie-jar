@@ -10,9 +10,9 @@ import Foundation
 
 struct ToDoItem {
     
-    public private(set) var title: String!
-    public private(set) var points: Int!
-    public private(set) var completed: Bool!
+    public private(set) var title: String
+    public private(set) var points: Int
+    public private(set) var completed: Bool
     
     init(title: String, points: Int) {
         self.title = title

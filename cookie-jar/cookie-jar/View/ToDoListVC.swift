@@ -33,30 +33,21 @@ class ToDoListVC: UIViewController {
         return tableView
     }()
     
-    
-    
-    
     // MARK: Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         [navBar, tableView].forEach { view.addSubview($0) }
-        
         tableView.delegate = self
         tableView.dataSource = self
-        
-        setupLayout()
-    }
-    
-    private func setupLayout() {
         navBar.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: tableView.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
         tableView.setEdgeConstraints(top: navBar.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
     }
     
-    // MARK:
+    // MARK: Actions
     @objc func addToDoItem() {
         let popup = AddToDoItemView()
+        popup.toDoCreationDelegate = self
         self.view.addSubview(popup)
     }
     
@@ -87,5 +78,11 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             return "Completed"
         }
+    }
+}
+
+extension ToDoListVC: ToDoCreationDelegate {
+    func createNewToDoItem(title: String, points: Int) {
+        viewModel.createToDoItem(title: title, points: points)
     }
 }

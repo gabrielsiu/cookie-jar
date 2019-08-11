@@ -16,6 +16,7 @@ class AddToDoItemView: UIView {
     
     // MARK: Properties
     var toDoCreationDelegate: ToDoCreationDelegate!
+    var numPoints: Int!
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -49,6 +50,7 @@ class AddToDoItemView: UIView {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 1
         segmentedControl.backgroundColor = .white
+        segmentedControl.addTarget(nil, action: #selector(onSegmentValueChanged(sender:)), for: .valueChanged)
         return segmentedControl
     }()
     
@@ -108,8 +110,24 @@ class AddToDoItemView: UIView {
         }
     }
     
+    // MARK: Actions
     @objc private func addToDoButtonPressed() {
-        toDoCreationDelegate.createNewToDoItem(title: toDoItemTextField.text ?? "", points: <#T##Int#>)
+        toDoCreationDelegate.createNewToDoItem(title: toDoItemTextField.text ?? "", points: numPoints)
+    }
+    
+    @objc private func onSegmentValueChanged(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            numPoints = 0
+        case 1:
+            numPoints = 1
+        case 2:
+            numPoints = 2
+        case 3:
+            numPoints = 3
+        default:
+            break
+        }
     }
     
     // MARK: Initialization
@@ -128,6 +146,7 @@ class AddToDoItemView: UIView {
         topStack.setEdgeConstraints(top: container.topAnchor, bottom: nil, leading: container.leadingAnchor, trailing: container.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 0, right: 16))
         bottomStack.setEdgeConstraints(top: nil, bottom: container.bottomAnchor, leading: container.leadingAnchor, trailing: container.trailingAnchor, padding: .init(top: 0, left: 16, bottom: 20, right: 16))
         
+        numPoints = 1
         animateIn()
     }
     
