@@ -12,7 +12,6 @@ class ToDoListVM {
     
     // MARK: Properties
     private var toDoList = [ToDoItem]()
-    private var completedToDoList = [ToDoItem]()
     private let defaults = UserDefaults.standard
     
     // MARK: Methods
@@ -22,19 +21,15 @@ class ToDoListVM {
     }
     
     func deleteToDoItem(index: Int, completed: Bool) {
-        if completed {
-            completedToDoList.remove(at: index)
-        } else {
-            toDoList.remove(at: index)
-        }
+        toDoList.remove(at: index)
+    }
+    
+    func toggleToDoItem(index: Int) {
+        toDoList[index].completed = !toDoList[index].completed
     }
     
     func getToDoList() -> [ToDoItem] {
         return toDoList
-    }
-    
-    func getCompletedToDoList() -> [ToDoItem] {
-        return completedToDoList
     }
     
     func getPointsString(numPoints: Int) -> String {

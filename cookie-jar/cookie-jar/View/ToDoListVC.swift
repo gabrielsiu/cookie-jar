@@ -60,10 +60,19 @@ class ToDoListVC: UIViewController {
 // MARK: - Delegate Methods
 extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var active = 0
+        var completed = 0
+        for element in toDoListViewModel.getToDoList() {
+            if !element.completed {
+                active += 1
+            } else {
+                completed += 1
+            }
+        }
         if section == 0 {
-            return toDoListViewModel.getToDoList().count
+            return active
         } else {
-            return toDoListViewModel.getCompletedToDoList().count
+            return completed
         }
     }
     
@@ -73,7 +82,11 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
         cell = UITableViewCell(style: .value1, reuseIdentifier: "ToDoItemCell")
         cell.textLabel?.text = toDoItem.title
         cell.detailTextLabel?.text = toDoListViewModel.getPointsString(numPoints: toDoItem.points)
-        cell.accessoryType = .none
+        if toDoItem.completed {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
         return cell
     }
     
@@ -87,6 +100,11 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             return "Completed"
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        toDoListViewModel.toggleToDoItem(index: indexPath.row)
     }
 }
 
