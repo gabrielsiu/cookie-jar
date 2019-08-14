@@ -60,33 +60,25 @@ class ToDoListVC: UIViewController {
 // MARK: - Delegate Methods
 extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var active = 0
-        var completed = 0
-        for element in toDoListViewModel.getToDoList() {
-            if !element.completed {
-                active += 1
-            } else {
-                completed += 1
-            }
-        }
         if section == 0 {
-            return active
+            return toDoListViewModel.getToDoList().count
         } else {
-            return completed
+            return toDoListViewModel.getCompletedToDoList().count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let toDoItem = toDoListViewModel.getToDoList()[indexPath.row]
+        var toDoItem: ToDoItem
+        if indexPath.section == 0 {
+            toDoItem = toDoListViewModel.getToDoList()[indexPath.row]
+        } else {
+            toDoItem = toDoListViewModel.getCompletedToDoList()[indexPath.row]
+        }
         var cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
         cell = UITableViewCell(style: .value1, reuseIdentifier: "ToDoItemCell")
         cell.textLabel?.text = toDoItem.title
         cell.detailTextLabel?.text = toDoListViewModel.getPointsString(numPoints: toDoItem.points)
-        if toDoItem.completed {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
+        cell.accessoryType = toDoListViewModel.getAccessoryType(completed: toDoItem.completed)
         return cell
     }
     
@@ -104,7 +96,11 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        toDoListViewModel.toggleToDoItem(index: indexPath.row)
+        if indexPath.section == 0 {
+            toDoListViewModel.toggleToDoItem(index: indexPath.row, completed: false)
+        } else {
+            toDoListViewModel.toggleToDoItem(index: indexPath.row, completed: true)
+        }
     }
 }
 

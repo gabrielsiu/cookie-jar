@@ -6,12 +6,13 @@
 //  Copyright © 2019 Gabriel Siu. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class ToDoListVM {
     
     // MARK: Properties
     private var toDoList = [ToDoItem]()
+    private var completedToDoList = [ToDoItem]()
     private let defaults = UserDefaults.standard
     
     // MARK: Methods
@@ -21,15 +22,39 @@ class ToDoListVM {
     }
     
     func deleteToDoItem(index: Int, completed: Bool) {
-        toDoList.remove(at: index)
+        if completed {
+            completedToDoList.remove(at: index)
+        } else {
+            toDoList.remove(at: index)
+        }
     }
     
-    func toggleToDoItem(index: Int) {
-        toDoList[index].completed = !toDoList[index].completed
+    func toggleToDoItem(index: Int, completed: Bool) {
+        if completed {
+            completedToDoList[index].completed = !completedToDoList[index].completed
+            toDoList.append(completedToDoList[index])
+            completedToDoList.remove(at: index)
+        } else {
+            toDoList[index].completed = !toDoList[index].completed
+            completedToDoList.append(toDoList[index])
+            toDoList.remove(at: index)
+        }
     }
     
     func getToDoList() -> [ToDoItem] {
         return toDoList
+    }
+    
+    func getCompletedToDoList() -> [ToDoItem] {
+        return completedToDoList
+    }
+    
+    func getAccessoryType(completed: Bool) -> UITableViewCell.AccessoryType {
+        if completed {
+            return .checkmark
+        } else {
+            return .none
+        }
     }
     
     func getPointsString(numPoints: Int) -> String {
