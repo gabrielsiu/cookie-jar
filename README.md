@@ -1,2 +1,2 @@
 # Cookie Jar
-A to-do list app that offers a points-based reward system
+An iOS to-do list app that offers a points-based reward system
