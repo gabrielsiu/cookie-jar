@@ -44,6 +44,18 @@ class ToDoListVM {
         notifyTableViewNeedsUpdate()
     }
     
+    func moveToDoItem(section: Int, prevIndex: Int, newIndex: Int) {
+        if section == 0 {
+            let itemToMove = toDoList[prevIndex]
+            toDoList.remove(at: prevIndex)
+            toDoList.insert(itemToMove, at: newIndex)
+        } else {
+            let itemToMove = completedToDoList[prevIndex]
+            completedToDoList.remove(at: prevIndex)
+            completedToDoList.insert(itemToMove, at: newIndex)
+        }
+    }
+    
     func notifyTableViewNeedsUpdate() {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "newToDoPosted"), object: nil)
     }

@@ -12,6 +12,7 @@ class ToDoListVC: UIViewController {
     
     // MARK: Properties
     private let toDoListViewModel = ToDoListVM()
+    // TODO: Make dynamic to update with points (maybe with viewmodel)
     private var pointsString: String = {
         return "Testing"
     }()
@@ -20,8 +21,9 @@ class ToDoListVC: UIViewController {
         let navBar = UINavigationBar()
         let navItem = UINavigationItem(title: "To-Do List")
         let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: #selector(addToDoItem))
+        let editItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: #selector(editToDoList))
         let profileItem = UIBarButtonItem(title: pointsString, style: .plain, target: nil, action: #selector(presentProfilePopup))
-        navItem.rightBarButtonItem = addItem
+        navItem.rightBarButtonItems = [addItem, editItem]
         navItem.leftBarButtonItem = profileItem
         navBar.setItems([navItem], animated: false)
         return navBar
@@ -52,9 +54,18 @@ class ToDoListVC: UIViewController {
     
     // MARK: Actions
     @objc func addToDoItem() {
+        print(tableView.isEditing)
         let popup = AddToDoItemView()
         popup.toDoCreationDelegate = self
         self.view.addSubview(popup)
+    }
+    
+    @objc func editToDoList() {
+        if tableView.isEditing {
+            tableView.setEditing(false, animated: true)
+        } else {
+            tableView.setEditing(true, animated: true)
+        }
     }
     
     @objc func presentProfilePopup() {
@@ -110,6 +121,25 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             toDoListViewModel.toggleToDoItem(index: indexPath.row, completed: true)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        toDoListViewModel.moveToDoItem(section: sourceIndexPath.section, prevIndex: sourceIndexPath.row, newIndex: destinationIndexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if sourceIndexPath.section != proposedDestinationIndexPath.section {
+            var row = 0
+            if sourceIndexPath.section < proposedDestinationIndexPath.section {
+                row = self.tableView(tableView, numberOfRowsInSection: sourceIndexPath.section) - 1
+            }
+            return IndexPath(row: row, section: sourceIndexPath.section)
+        }
+        return proposedDestinationIndexPath
     }
 }
 
