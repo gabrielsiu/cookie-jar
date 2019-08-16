@@ -34,7 +34,7 @@ class ToDoListVC: UIViewController {
         return tableView
     }()
     
-    // MARK: Initialization
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -43,6 +43,11 @@ class ToDoListVC: UIViewController {
         tableView.dataSource = self
         navBar.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: tableView.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
         tableView.setEdgeConstraints(top: navBar.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name(rawValue: "newToDoPosted"), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: Actions
@@ -53,6 +58,10 @@ class ToDoListVC: UIViewController {
     }
     
     @objc func presentProfilePopup() {
+        tableView.reloadData()
+    }
+    
+    @objc func refreshTableView() {
         tableView.reloadData()
     }
 }

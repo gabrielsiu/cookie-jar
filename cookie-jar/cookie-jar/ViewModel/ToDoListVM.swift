@@ -19,6 +19,7 @@ class ToDoListVM {
     func createToDoItem(title: String, points: Int) {
         let newToDoItem = ToDoItem(title: title, points: points)
         toDoList.append(newToDoItem)
+        notifyTableViewNeedsUpdate()
     }
     
     func deleteToDoItem(index: Int, completed: Bool) {
@@ -27,6 +28,7 @@ class ToDoListVM {
         } else {
             toDoList.remove(at: index)
         }
+        notifyTableViewNeedsUpdate()
     }
     
     func toggleToDoItem(index: Int, completed: Bool) {
@@ -39,6 +41,11 @@ class ToDoListVM {
             completedToDoList.append(toDoList[index])
             toDoList.remove(at: index)
         }
+        notifyTableViewNeedsUpdate()
+    }
+    
+    func notifyTableViewNeedsUpdate() {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "newToDoPosted"), object: nil)
     }
     
     func getToDoList() -> [ToDoItem] {
