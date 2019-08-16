@@ -45,7 +45,7 @@ class ToDoListVC: UIViewController {
         tableView.dataSource = self
         navBar.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: tableView.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
         tableView.setEdgeConstraints(top: navBar.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name(rawValue: "newToDoPosted"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name(rawValue: "toDoListChanged"), object: nil)
     }
     
     deinit {
@@ -78,6 +78,12 @@ class ToDoListVC: UIViewController {
 }
 
 // MARK: - Delegate Methods
+extension ToDoListVC: ToDoCreationDelegate {
+    func createNewToDoItem(title: String, points: Int) {
+        toDoListViewModel.createToDoItem(title: title, points: points)
+    }
+}
+
 extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
@@ -128,23 +134,6 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        toDoListViewModel.moveToDoItem(section: sourceIndexPath.section, prevIndex: sourceIndexPath.row, newIndex: destinationIndexPath.row)
-    }
-    
-    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
-        if sourceIndexPath.section != proposedDestinationIndexPath.section {
-            var row = 0
-            if sourceIndexPath.section < proposedDestinationIndexPath.section {
-                row = self.tableView(tableView, numberOfRowsInSection: sourceIndexPath.section) - 1
-            }
-            return IndexPath(row: row, section: sourceIndexPath.section)
-        }
-        return proposedDestinationIndexPath
-    }
-}
-
-extension ToDoListVC: ToDoCreationDelegate {
-    func createNewToDoItem(title: String, points: Int) {
-        toDoListViewModel.createToDoItem(title: title, points: points)
+        toDoListViewModel.moveToDoItem(prevIndexPath: sourceIndexPath, newIndexPath: destinationIndexPath)
     }
 }

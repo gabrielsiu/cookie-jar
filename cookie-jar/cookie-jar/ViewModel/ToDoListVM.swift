@@ -44,20 +44,40 @@ class ToDoListVM {
         notifyTableViewNeedsUpdate()
     }
     
-    func moveToDoItem(section: Int, prevIndex: Int, newIndex: Int) {
-        if section == 0 {
-            let itemToMove = toDoList[prevIndex]
-            toDoList.remove(at: prevIndex)
-            toDoList.insert(itemToMove, at: newIndex)
+    func moveToDoItem(prevIndexPath: IndexPath, newIndexPath: IndexPath) {
+        let prevSection = prevIndexPath.section
+        let prevRow = prevIndexPath.row
+        let newSection = newIndexPath.section
+        let newRow = newIndexPath.row
+        
+        if prevSection == newSection {
+            if prevSection == 0 {
+                let itemToMove = toDoList[prevRow]
+                toDoList.remove(at: prevRow)
+                toDoList.insert(itemToMove, at: newRow)
+            } else {
+                let itemToMove = completedToDoList[prevRow]
+                completedToDoList.remove(at: prevRow)
+                completedToDoList.insert(itemToMove, at: newRow)
+            }
         } else {
-            let itemToMove = completedToDoList[prevIndex]
-            completedToDoList.remove(at: prevIndex)
-            completedToDoList.insert(itemToMove, at: newIndex)
+            if prevSection == 0 {
+                toDoList[prevRow].completed = !toDoList[prevRow].completed
+                let itemToMove = toDoList[prevRow]
+                toDoList.remove(at: prevRow)
+                completedToDoList.insert(itemToMove, at: newRow)
+            } else {
+                completedToDoList[prevRow].completed = !completedToDoList[prevRow].completed
+                let itemToMove = completedToDoList[prevRow]
+                completedToDoList.remove(at: prevRow)
+                toDoList.insert(itemToMove, at: newRow)
+            }
+            notifyTableViewNeedsUpdate()
         }
     }
     
     func notifyTableViewNeedsUpdate() {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "newToDoPosted"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "toDoListChanged"), object: nil)
     }
     
     func getToDoList() -> [ToDoItem] {
