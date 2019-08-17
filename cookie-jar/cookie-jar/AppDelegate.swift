@@ -17,7 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = ToDoListViewController()
+        let navController = UINavigationController()
+        let toDoListVC = ToDoListViewController()
+        navController.viewControllers = [toDoListVC]
+        self.window?.rootViewController = navController
         self.window?.makeKeyAndVisible()
         self.window?.tintColor = .brown
         return true

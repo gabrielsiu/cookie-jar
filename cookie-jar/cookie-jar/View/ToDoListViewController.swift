@@ -16,18 +16,6 @@ class ToDoListViewController: UIViewController {
         return "0 points"
     }()
     
-    private lazy var navBar: UINavigationBar = {
-        let navBar = UINavigationBar()
-        let navItem = UINavigationItem(title: "To-Do List")
-        let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: #selector(addToDoItem))
-        let editItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: #selector(editToDoList))
-        let profileItem = UIBarButtonItem(title: pointsString, style: .plain, target: nil, action: #selector(presentProfilePopup))
-        navItem.rightBarButtonItems = [addItem, editItem]
-        navItem.leftBarButtonItem = profileItem
-        navBar.setItems([navItem], animated: false)
-        return navBar
-    }()
-    
     private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ToDoItemCell")
@@ -38,13 +26,22 @@ class ToDoListViewController: UIViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNavBar()
         view.backgroundColor = .white
-        [navBar, tableView].forEach { view.addSubview($0) }
+        view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        navBar.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: tableView.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
-        tableView.setEdgeConstraints(top: navBar.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        tableView.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name(rawValue: "toDoListChanged"), object: nil)
+    }
+    
+    private func setUpNavBar() {
+        let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToDoItem))
+        let profileItem = UIBarButtonItem(title: pointsString, style: .plain, target: self, action: #selector(presentProfilePopup))
+        
+        navigationItem.rightBarButtonItems = [addItem, editButtonItem]
+        navigationItem.leftBarButtonItem = profileItem
+        navigationItem.title = "To-Do List"
     }
     
     deinit {
@@ -53,22 +50,19 @@ class ToDoListViewController: UIViewController {
     
     // MARK: Actions
     func updatePoints(indexPath: IndexPath) {
-        guard let item = navBar.items?[0].leftBarButtonItem else { return }
+        guard let item = navigationItem.leftBarButtonItem else { return }
         item.title = toDoListViewModel.updatePoints(indexPath: indexPath)
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
     }
     
     @objc func addToDoItem() {
         let popup = AddToDoItemView()
         popup.toDoCreationDelegate = self
         self.view.addSubview(popup)
-    }
-    
-    @objc func editToDoList() {
-        if tableView.isEditing {
-            tableView.setEditing(false, animated: true)
-        } else {
-            tableView.setEditing(true, animated: true)
-        }
     }
     
     @objc func presentProfilePopup() {
