@@ -77,7 +77,37 @@ class ToDoListViewModel {
                 completedToDoList.remove(at: prevRow)
                 toDoList.insert(itemToMove, at: newRow)
             }
-            notifyTableViewNeedsUpdate()
+        }
+    }
+    
+    func updatePointsForToggle(indexPath: IndexPath) {
+        let section = indexPath.section
+        let row = indexPath.row
+        var points: Int
+        
+        if section == 0 {
+            points = toDoList[row].points
+            numPoints += points
+        } else {
+            points = completedToDoList[row].points
+            numPoints -= points
+        }
+    }
+    
+    func updatePointsForMove(prevIndexPath: IndexPath, newIndexPath: IndexPath) {
+        let prevSection = prevIndexPath.section
+        let prevRow = prevIndexPath.row
+        let newSection = newIndexPath.section
+        var points: Int
+        
+        if prevSection != newSection {
+            if prevSection == 0 {
+                points = toDoList[prevRow].points
+                numPoints += points
+            } else {
+                points = completedToDoList[prevRow].points
+                numPoints -= points
+            }
         }
     }
     
@@ -101,19 +131,8 @@ class ToDoListViewModel {
         }
     }
     
-    func updatePoints(indexPath: IndexPath) -> String {
-        let section = indexPath.section
-        let row = indexPath.row
-        var points: Int
-        
-        if section == 0 {
-            points = toDoList[row].points
-            numPoints += points
-        } else {
-            points = completedToDoList[row].points
-            numPoints -= points
-        }
-        return getPointsString(numPoints: numPoints)
+    func getCurrentPointsString() -> String {
+         return getPointsString(numPoints: numPoints)
     }
     
     func getPointsString(numPoints: Int) -> String {

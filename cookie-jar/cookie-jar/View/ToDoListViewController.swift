@@ -49,9 +49,9 @@ class ToDoListViewController: UIViewController {
     }
     
     // MARK: Actions
-    func updatePoints(indexPath: IndexPath) {
+    func updatePointsLabel() {
         guard let item = navigationItem.leftBarButtonItem else { return }
-        item.title = toDoListViewModel.updatePoints(indexPath: indexPath)
+        item.title = toDoListViewModel.getCurrentPointsString()
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -128,7 +128,8 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        updatePoints(indexPath: indexPath)
+        toDoListViewModel.updatePointsForToggle(indexPath: indexPath)
+        updatePointsLabel()
         toDoListViewModel.toggleToDoItem(indexPath: indexPath)
     }
     
@@ -137,7 +138,8 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // TODO: Update points when moved
+        toDoListViewModel.updatePointsForMove(prevIndexPath: sourceIndexPath, newIndexPath: destinationIndexPath)
+        updatePointsLabel()
         toDoListViewModel.moveToDoItem(prevIndexPath: sourceIndexPath, newIndexPath: destinationIndexPath)
     }
 }
