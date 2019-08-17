@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		DA44B8B62307C52300050E58 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */; };
+		DA44B8B82307C6E600050E58 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B72307C6E600050E58 /* ProfileViewController.swift */; };
+		DA44B8BA2308672E00050E58 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B92308672E00050E58 /* ProfileViewModel.swift */; };
+		DA44B8BC230869FF00050E58 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8BB230869FF00050E58 /* RoundedButton.swift */; };
 		DA8F284A22FBCABE00B32254 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F284922FBCABE00B32254 /* AppDelegate.swift */; };
 		DA8F284C22FBCABE00B32254 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F284B22FBCABE00B32254 /* ToDoListViewController.swift */; };
 		DA8F285122FBCAC300B32254 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8F285022FBCAC300B32254 /* Assets.xcassets */; };
@@ -19,6 +22,9 @@
 
 /* Begin PBXFileReference section */
 		DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
+		DA44B8B72307C6E600050E58 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		DA44B8B92308672E00050E58 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		DA44B8BB230869FF00050E58 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		DA8F284622FBCABE00B32254 /* cookie-jar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cookie-jar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8F284922FBCABE00B32254 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA8F284B22FBCABE00B32254 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */,
+				DA44B8B92308672E00050E58 /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -83,8 +90,10 @@
 		DA8F285D22FE725A00B32254 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DA44B8BB230869FF00050E58 /* RoundedButton.swift */,
 				DA8F284B22FBCABE00B32254 /* ToDoListViewController.swift */,
 				DA8F287022FF915F00B32254 /* AddToDoItemView.swift */,
+				DA44B8B72307C6E600050E58 /* ProfileViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -179,7 +188,10 @@
 				DA8F284C22FBCABE00B32254 /* ToDoListViewController.swift in Sources */,
 				DA8F284A22FBCABE00B32254 /* AppDelegate.swift in Sources */,
 				DA8F287122FF915F00B32254 /* AddToDoItemView.swift in Sources */,
+				DA44B8BC230869FF00050E58 /* RoundedButton.swift in Sources */,
+				DA44B8B82307C6E600050E58 /* ProfileViewController.swift in Sources */,
 				DA8F286B22FF682D00B32254 /* ToDoItem.swift in Sources */,
+				DA44B8BA2308672E00050E58 /* ProfileViewModel.swift in Sources */,
 				DA8F286722FF45B600B32254 /* UIView+Constraints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

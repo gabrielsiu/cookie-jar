@@ -72,6 +72,9 @@ class ToDoListViewController: UIViewController {
     }
     
     @objc func presentProfilePopup() {
+        let profileVC = ProfileViewController()
+        profileVC.modalPresentationStyle = .overCurrentContext
+        present(profileVC, animated: true, completion: nil)
     }
     
     @objc func refreshTableView() {
@@ -140,6 +143,7 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // TODO: Update points when moved
         toDoListViewModel.moveToDoItem(prevIndexPath: sourceIndexPath, newIndexPath: destinationIndexPath)
     }
 }

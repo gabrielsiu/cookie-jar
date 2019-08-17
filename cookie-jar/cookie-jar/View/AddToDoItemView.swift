@@ -19,7 +19,6 @@ class AddToDoItemView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.text = "Enter the new to-do item:"
         label.textAlignment = .center
@@ -28,14 +27,12 @@ class AddToDoItemView: UIView {
     
     private let toDoItemTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "New to-do"
         return textField
     }()
     
     private let pointsLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.text = "Select the amount of points to be rewarded upon completing this task:"
         label.textAlignment = .center
@@ -46,27 +43,20 @@ class AddToDoItemView: UIView {
     private let pointsControl: UISegmentedControl = {
         let points = ["0", "1", "2", "3"]
         let segmentedControl = UISegmentedControl(items: points)
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 1
         segmentedControl.backgroundColor = .white
         segmentedControl.addTarget(nil, action: #selector(onSegmentValueChanged(sender:)), for: .valueChanged)
         return segmentedControl
     }()
     
-    private let addToDoButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Add to-do", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 5
-        button.layer.backgroundColor = UIColor.brown.cgColor
+    private let addToDoButton: RoundedButton = {
+        let button = RoundedButton(title: "Add to-do", bgColor: UIColor.brown.cgColor)
         button.addTarget(nil, action: #selector(addToDoButtonPressed), for: .touchUpInside)
         return button
     }()
     
     private lazy var topStack: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [titleLabel, toDoItemTextField])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
@@ -74,7 +64,6 @@ class AddToDoItemView: UIView {
     
     private lazy var bottomStack: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [pointsLabel, pointsControl, addToDoButton])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
@@ -82,7 +71,6 @@ class AddToDoItemView: UIView {
     
     private let container: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.layer.cornerRadius = 10
         return view
