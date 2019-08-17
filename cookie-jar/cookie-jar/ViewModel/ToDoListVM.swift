@@ -11,6 +11,7 @@ import UIKit
 class ToDoListVM {
     
     // MARK: Properties
+    private var numPoints: Int = 0
     private var toDoList = [ToDoItem]()
     private var completedToDoList = [ToDoItem]()
     private let defaults = UserDefaults.standard
@@ -99,6 +100,21 @@ class ToDoListVM {
         } else {
             return .none
         }
+    }
+    
+    func updatePoints(indexPath: IndexPath) -> String {
+        let section = indexPath.section
+        let row = indexPath.row
+        var points: Int
+        
+        if section == 0 {
+            points = toDoList[row].points
+            numPoints += points
+        } else {
+            points = completedToDoList[row].points
+            numPoints -= points
+        }
+        return getPointsString(numPoints: numPoints)
     }
     
     func getPointsString(numPoints: Int) -> String {

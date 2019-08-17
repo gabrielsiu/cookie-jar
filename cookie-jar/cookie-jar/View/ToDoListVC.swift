@@ -14,7 +14,7 @@ class ToDoListVC: UIViewController {
     private let toDoListViewModel = ToDoListVM()
     // TODO: Make dynamic to update with points (maybe with viewmodel)
     private var pointsString: String = {
-        return "Testing"
+        return "0 points"
     }()
     
     private lazy var navBar: UINavigationBar = {
@@ -53,6 +53,11 @@ class ToDoListVC: UIViewController {
     }
     
     // MARK: Actions
+    func updatePoints(indexPath: IndexPath) {
+        guard let item = navBar.items?[0].leftBarButtonItem else { return }
+        item.title = toDoListViewModel.updatePoints(indexPath: indexPath)
+    }
+    
     @objc func addToDoItem() {
         let popup = AddToDoItemView()
         popup.toDoCreationDelegate = self
@@ -68,7 +73,6 @@ class ToDoListVC: UIViewController {
     }
     
     @objc func presentProfilePopup() {
-        tableView.reloadData()
     }
     
     @objc func refreshTableView() {
@@ -128,6 +132,7 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        updatePoints(indexPath: indexPath)
         toDoListViewModel.toggleToDoItem(indexPath: indexPath)
     }
     
