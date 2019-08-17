@@ -54,7 +54,6 @@ class ToDoListVC: UIViewController {
     
     // MARK: Actions
     @objc func addToDoItem() {
-        print(tableView.isEditing)
         let popup = AddToDoItemView()
         popup.toDoCreationDelegate = self
         self.view.addSubview(popup)
@@ -120,13 +119,16 @@ extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            toDoListViewModel.deleteToDoItem(indexPath: indexPath)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 {
-            toDoListViewModel.toggleToDoItem(index: indexPath.row, completed: false)
-        } else {
-            toDoListViewModel.toggleToDoItem(index: indexPath.row, completed: true)
-        }
+        toDoListViewModel.toggleToDoItem(indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {

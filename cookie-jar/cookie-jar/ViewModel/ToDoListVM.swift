@@ -22,24 +22,29 @@ class ToDoListVM {
         notifyTableViewNeedsUpdate()
     }
     
-    func deleteToDoItem(index: Int, completed: Bool) {
-        if completed {
-            completedToDoList.remove(at: index)
+    func deleteToDoItem(indexPath: IndexPath) {
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        if section == 0 {
+            toDoList.remove(at: row)
         } else {
-            toDoList.remove(at: index)
+            completedToDoList.remove(at: row)
         }
-        notifyTableViewNeedsUpdate()
     }
     
-    func toggleToDoItem(index: Int, completed: Bool) {
-        if completed {
-            completedToDoList[index].completed = !completedToDoList[index].completed
-            toDoList.append(completedToDoList[index])
-            completedToDoList.remove(at: index)
+    func toggleToDoItem(indexPath: IndexPath) {
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        if section == 0 {
+            toDoList[row].completed = !toDoList[row].completed
+            completedToDoList.append(toDoList[row])
+            toDoList.remove(at: row)
         } else {
-            toDoList[index].completed = !toDoList[index].completed
-            completedToDoList.append(toDoList[index])
-            toDoList.remove(at: index)
+            completedToDoList[row].completed = !completedToDoList[row].completed
+            toDoList.append(completedToDoList[row])
+            completedToDoList.remove(at: row)
         }
         notifyTableViewNeedsUpdate()
     }
