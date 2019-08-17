@@ -9,7 +9,6 @@
 import Foundation
 
 struct ToDoItem {
-    
     var title: String
     var points: Int
     var completed: Bool

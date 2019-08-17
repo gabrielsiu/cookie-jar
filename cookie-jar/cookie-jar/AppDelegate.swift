@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = ToDoListVC()
+        self.window?.rootViewController = ToDoListViewController()
         self.window?.makeKeyAndVisible()
         self.window?.tintColor = .brown
         return true

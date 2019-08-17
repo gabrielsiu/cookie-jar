@@ -13,7 +13,6 @@ protocol ToDoCreationDelegate {
 }
 
 class AddToDoItemView: UIView {
-    
     // MARK: Properties
     var toDoCreationDelegate: ToDoCreationDelegate!
     var numPoints: Int!

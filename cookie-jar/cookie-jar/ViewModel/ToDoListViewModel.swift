@@ -1,5 +1,5 @@
 //
-//  ToDoListVM.swift
+//  ToDoListViewModel.swift
 //  cookie-jar
 //
 //  Created by Gabriel Siu on 2019-08-09.
@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ToDoListVM {
-    
+class ToDoListViewModel {
     // MARK: Properties
     private var numPoints: Int = 0
     private var toDoList = [ToDoItem]()

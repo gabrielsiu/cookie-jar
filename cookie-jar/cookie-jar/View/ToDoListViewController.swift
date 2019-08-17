@@ -8,10 +8,9 @@
 
 import UIKit
 
-class ToDoListVC: UIViewController {
-    
+class ToDoListViewController: UIViewController {
     // MARK: Properties
-    private let toDoListViewModel = ToDoListVM()
+    private let toDoListViewModel = ToDoListViewModel()
     // TODO: Make dynamic to update with points (maybe with viewmodel)
     private var pointsString: String = {
         return "0 points"
@@ -81,13 +80,13 @@ class ToDoListVC: UIViewController {
 }
 
 // MARK: - Delegate Methods
-extension ToDoListVC: ToDoCreationDelegate {
+extension ToDoListViewController: ToDoCreationDelegate {
     func createNewToDoItem(title: String, points: Int) {
         toDoListViewModel.createToDoItem(title: title, points: points)
     }
 }
 
-extension ToDoListVC: UITableViewDelegate, UITableViewDataSource {
+extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return toDoListViewModel.getToDoList().count
