@@ -67,8 +67,8 @@ class ToDoListViewController: UIViewController {
     
     @objc func presentProfilePopup() {
         let profileVC = ProfileViewController()
-        profileVC.modalPresentationStyle = .overCurrentContext
-        present(profileVC, animated: true, completion: nil)
+        let navController = UINavigationController(rootViewController: profileVC)
+        present(navController, animated: true, completion: nil)
     }
     
     @objc func refreshTableView() {
