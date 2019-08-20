@@ -42,10 +42,19 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         [labelStack, cookieTableView].forEach { view.addSubview($0) }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissScreen))
         cookieTableView.delegate = self
         cookieTableView.dataSource = self
         labelStack.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: cookieTableView.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
         cookieTableView.setEdgeConstraints(top: labelStack.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
+    }
+    
+    deinit {
+        print("ProfileViewController deinit")
+    }
+    
+    @objc func dismissScreen() {
+        dismiss(animated: true) {}
     }
 }
 

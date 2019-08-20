@@ -9,5 +9,6 @@
 import Foundation
 
 class ProfileViewModel {
-    
+    // MARK: Properties
+    private var cookieList = [Cookie]()
 }

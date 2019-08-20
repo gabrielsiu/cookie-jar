@@ -18,6 +18,7 @@
 		DA8F286722FF45B600B32254 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F286622FF45B600B32254 /* UIView+Constraints.swift */; };
 		DA8F286B22FF682D00B32254 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F286A22FF682D00B32254 /* ToDoItem.swift */; };
 		DA8F287122FF915F00B32254 /* AddToDoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F287022FF915F00B32254 /* AddToDoItemView.swift */; };
+		DAD6999F230B8AD80052E1BB /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD6999E230B8AD80052E1BB /* Cookie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		DA8F286622FF45B600B32254 /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		DA8F286A22FF682D00B32254 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		DA8F287022FF915F00B32254 /* AddToDoItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToDoItemView.swift; sourceTree = "<group>"; };
+		DAD6999E230B8AD80052E1BB /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				DA8F286A22FF682D00B32254 /* ToDoItem.swift */,
+				DAD6999E230B8AD80052E1BB /* Cookie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				DA44B8BC230869FF00050E58 /* RoundedButton.swift in Sources */,
 				DA44B8B82307C6E600050E58 /* ProfileViewController.swift in Sources */,
 				DA8F286B22FF682D00B32254 /* ToDoItem.swift in Sources */,
+				DAD6999F230B8AD80052E1BB /* Cookie.swift in Sources */,
 				DA44B8BA2308672E00050E58 /* ProfileViewModel.swift in Sources */,
 				DA8F286722FF45B600B32254 /* UIView+Constraints.swift in Sources */,
 			);
