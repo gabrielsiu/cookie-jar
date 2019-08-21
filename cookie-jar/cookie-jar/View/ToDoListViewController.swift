@@ -11,10 +11,8 @@ import UIKit
 class ToDoListViewController: UIViewController {
     // MARK: Properties
     private let toDoListViewModel = ToDoListViewModel()
-    // TODO: Make dynamic to update with points (maybe with viewmodel)
-    private var pointsString: String = {
-        return "0 points"
-    }()
+    
+    private var pointsString: String = "0 points"
     
     private var tableView: UITableView = {
         let tableView = UITableView()

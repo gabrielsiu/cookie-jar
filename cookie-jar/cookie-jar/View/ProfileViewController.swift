@@ -10,6 +10,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     // MARK: Properties
+    private let profileViewModel = ProfileViewModel()
+    
     private let greetingLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
@@ -37,24 +39,53 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    private let shopButton: RoundedButton = {
+        let button = RoundedButton(title: "Cookie Shop", bgColor: UIColor.brown.cgColor)
+        button.addTarget(nil, action: #selector(toCookieShopVC), for: .touchUpInside)
+        return button
+    }()
+    
+    private let resetButton: RoundedButton = {
+        let button = RoundedButton(title: "Reset data", bgColor: UIColor.red.cgColor)
+        button.addTarget(nil, action: #selector(toResetDataView), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var buttonStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [shopButton, resetButton])
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        return stackView
+    }()
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        [labelStack, cookieTableView].forEach { view.addSubview($0) }
+        [labelStack, cookieTableView, buttonStack].forEach { view.addSubview($0) }
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissScreen))
         cookieTableView.delegate = self
         cookieTableView.dataSource = self
         labelStack.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: cookieTableView.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
-        cookieTableView.setEdgeConstraints(top: labelStack.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        cookieTableView.setEdgeConstraints(top: labelStack.bottomAnchor, bottom: buttonStack.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        buttonStack.setEdgeConstraints(top: cookieTableView.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
     }
     
     deinit {
         print("ProfileViewController deinit")
     }
     
+    // MARK: Actions
     @objc func dismissScreen() {
         dismiss(animated: true) {}
+    }
+    
+    @objc func toCookieShopVC() {
+        
+    }
+    
+    @objc func toResetDataView() {
+        
     }
 }
 
@@ -65,7 +96,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return profileViewModel.getCookieList().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
