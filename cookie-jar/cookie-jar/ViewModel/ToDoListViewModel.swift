@@ -77,6 +77,7 @@ class ToDoListViewModel {
                 completedToDoList.remove(at: prevRow)
                 toDoList.insert(itemToMove, at: newRow)
             }
+            notifyTableViewNeedsUpdate()
         }
     }
     

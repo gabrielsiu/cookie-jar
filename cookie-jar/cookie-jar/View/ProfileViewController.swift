@@ -14,14 +14,14 @@ class ProfileViewController: UIViewController {
     
     private let greetingLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
         label.text = "Hello, Gabriel"
         return label
     }()
     
     private let pointsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        label.font = UIFont.systemFont(ofSize: 22, weight: .light)
         label.text = "You have 5 points to spend"
         return label
     }()
@@ -33,9 +33,10 @@ class ProfileViewController: UIViewController {
         return stackView
     }()
     
-    private var cookieTableView: UITableView = {
-        let tableView = UITableView()
+    private var cookieTableView: CookieTableView = {
+        let tableView = CookieTableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CookieCell")
+        tableView.maxHeight = 500
         return tableView
     }()
     
@@ -66,9 +67,9 @@ class ProfileViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissScreen))
         cookieTableView.delegate = self
         cookieTableView.dataSource = self
-        labelStack.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: cookieTableView.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
-        cookieTableView.setEdgeConstraints(top: labelStack.bottomAnchor, bottom: buttonStack.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
-        buttonStack.setEdgeConstraints(top: cookieTableView.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        labelStack.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: cookieTableView.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 20, right: 16))
+        cookieTableView.setEdgeConstraints(top: labelStack.bottomAnchor, bottom: buttonStack.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 20, right: 0))
+        buttonStack.setEdgeConstraints(top: cookieTableView.bottomAnchor, bottom: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 20, right: 16))
     }
     
     deinit {
