@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DA1CC200230E298D00EA7338 /* CookieTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1CC1FF230E298D00EA7338 /* CookieTableView.swift */; };
+		DA1CC202230E3B4C00EA7338 /* CookieShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1CC201230E3B4C00EA7338 /* CookieShopViewController.swift */; };
 		DA44B8B62307C52300050E58 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */; };
 		DA44B8B82307C6E600050E58 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B72307C6E600050E58 /* ProfileViewController.swift */; };
 		DA44B8BA2308672E00050E58 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B92308672E00050E58 /* ProfileViewModel.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		DA1CC1FF230E298D00EA7338 /* CookieTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookieTableView.swift; sourceTree = "<group>"; };
+		DA1CC201230E3B4C00EA7338 /* CookieShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieShopViewController.swift; sourceTree = "<group>"; };
 		DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
 		DA44B8B72307C6E600050E58 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DA44B8B92308672E00050E58 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -51,6 +53,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA1CC203230E3BF900EA7338 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DA8F284B22FBCABE00B32254 /* ToDoListViewController.swift */,
+				DA44B8B72307C6E600050E58 /* ProfileViewController.swift */,
+				DA1CC201230E3B4C00EA7338 /* CookieShopViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		DA8F283D22FBCABE00B32254 = {
 			isa = PBXGroup;
 			children = (
@@ -94,10 +106,9 @@
 		DA8F285D22FE725A00B32254 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DA1CC203230E3BF900EA7338 /* Controller */,
 				DA44B8BB230869FF00050E58 /* RoundedButton.swift */,
-				DA8F284B22FBCABE00B32254 /* ToDoListViewController.swift */,
 				DA8F287022FF915F00B32254 /* AddToDoItemView.swift */,
-				DA44B8B72307C6E600050E58 /* ProfileViewController.swift */,
 				DA1CC1FF230E298D00EA7338 /* CookieTableView.swift */,
 			);
 			path = View;
@@ -194,6 +205,7 @@
 				DA8F284C22FBCABE00B32254 /* ToDoListViewController.swift in Sources */,
 				DA8F284A22FBCABE00B32254 /* AppDelegate.swift in Sources */,
 				DA8F287122FF915F00B32254 /* AddToDoItemView.swift in Sources */,
+				DA1CC202230E3B4C00EA7338 /* CookieShopViewController.swift in Sources */,
 				DA44B8BC230869FF00050E58 /* RoundedButton.swift in Sources */,
 				DA44B8B82307C6E600050E58 /* ProfileViewController.swift in Sources */,
 				DA8F286B22FF682D00B32254 /* ToDoItem.swift in Sources */,
