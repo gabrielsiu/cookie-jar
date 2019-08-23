@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		DA1CC200230E298D00EA7338 /* CookieTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1CC1FF230E298D00EA7338 /* CookieTableView.swift */; };
 		DA1CC202230E3B4C00EA7338 /* CookieShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1CC201230E3B4C00EA7338 /* CookieShopViewController.swift */; };
+		DA4308E7230F8ACF00B1CA8D /* CookieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308E6230F8ACF00B1CA8D /* CookieCell.swift */; };
+		DA4308EA230F8F1A00B1CA8D /* CookieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308E9230F8F1A00B1CA8D /* CookieService.swift */; };
+		DA4308EC230F9C2D00B1CA8D /* CookieShopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308EB230F9C2D00B1CA8D /* CookieShopViewModel.swift */; };
 		DA44B8B62307C52300050E58 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */; };
 		DA44B8B82307C6E600050E58 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B72307C6E600050E58 /* ProfileViewController.swift */; };
 		DA44B8BA2308672E00050E58 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B92308672E00050E58 /* ProfileViewModel.swift */; };
@@ -26,6 +29,9 @@
 /* Begin PBXFileReference section */
 		DA1CC1FF230E298D00EA7338 /* CookieTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookieTableView.swift; sourceTree = "<group>"; };
 		DA1CC201230E3B4C00EA7338 /* CookieShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieShopViewController.swift; sourceTree = "<group>"; };
+		DA4308E6230F8ACF00B1CA8D /* CookieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieCell.swift; sourceTree = "<group>"; };
+		DA4308E9230F8F1A00B1CA8D /* CookieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieService.swift; sourceTree = "<group>"; };
+		DA4308EB230F9C2D00B1CA8D /* CookieShopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieShopViewModel.swift; sourceTree = "<group>"; };
 		DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
 		DA44B8B72307C6E600050E58 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DA44B8B92308672E00050E58 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -63,6 +69,14 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		DA4308E8230F8F0900B1CA8D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DA4308E9230F8F1A00B1CA8D /* CookieService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		DA8F283D22FBCABE00B32254 = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +96,7 @@
 		DA8F284822FBCABE00B32254 /* cookie-jar */ = {
 			isa = PBXGroup;
 			children = (
+				DA4308E8230F8F0900B1CA8D /* Services */,
 				DA8F285E22FE726000B32254 /* Model */,
 				DA8F285D22FE725A00B32254 /* View */,
 				DA8F285C22FE725000B32254 /* ViewModel */,
@@ -99,6 +114,7 @@
 			children = (
 				DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */,
 				DA44B8B92308672E00050E58 /* ProfileViewModel.swift */,
+				DA4308EB230F9C2D00B1CA8D /* CookieShopViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -110,6 +126,7 @@
 				DA44B8BB230869FF00050E58 /* RoundedButton.swift */,
 				DA8F287022FF915F00B32254 /* AddToDoItemView.swift */,
 				DA1CC1FF230E298D00EA7338 /* CookieTableView.swift */,
+				DA4308E6230F8ACF00B1CA8D /* CookieCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -207,10 +224,13 @@
 				DA8F287122FF915F00B32254 /* AddToDoItemView.swift in Sources */,
 				DA1CC202230E3B4C00EA7338 /* CookieShopViewController.swift in Sources */,
 				DA44B8BC230869FF00050E58 /* RoundedButton.swift in Sources */,
+				DA4308EC230F9C2D00B1CA8D /* CookieShopViewModel.swift in Sources */,
 				DA44B8B82307C6E600050E58 /* ProfileViewController.swift in Sources */,
+				DA4308EA230F8F1A00B1CA8D /* CookieService.swift in Sources */,
 				DA8F286B22FF682D00B32254 /* ToDoItem.swift in Sources */,
 				DAD6999F230B8AD80052E1BB /* Cookie.swift in Sources */,
 				DA1CC200230E298D00EA7338 /* CookieTableView.swift in Sources */,
+				DA4308E7230F8ACF00B1CA8D /* CookieCell.swift in Sources */,
 				DA44B8BA2308672E00050E58 /* ProfileViewModel.swift in Sources */,
 				DA8F286722FF45B600B32254 /* UIView+Constraints.swift in Sources */,
 			);

@@ -82,7 +82,7 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func toCookieShopVC() {
-        let cookieShopVC = CookieShopViewController()
+        let cookieShopVC = CookieShopViewController(cookieService: CookieService())
         self.navigationController?.pushViewController(cookieShopVC, animated: true)
     }
     

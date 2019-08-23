@@ -9,8 +9,9 @@
 import UIKit
 
 class CookieShopViewController: UIViewController {
-
     // MARK: Properties
+    private let cookieService: CookieService
+    
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
@@ -34,15 +35,23 @@ class CookieShopViewController: UIViewController {
     
     private var cookieCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: 100, height: 100)
         flowLayout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CookieCell")
+        collectionView.register(CookieCell.self, forCellWithReuseIdentifier: "CookieCell")
         collectionView.backgroundColor = .white
         return collectionView
     }()
     
     // MARK: Lifecycle
+    init(cookieService: CookieService) {
+        self.cookieService = cookieService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -55,16 +64,21 @@ class CookieShopViewController: UIViewController {
     }
 }
 
-extension CookieShopViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension CookieShopViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 80
+        return cookieService.getCookies().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CookieCell", for: indexPath)
-        cell.backgroundColor = .green
-        return cell
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CookieCell", for: indexPath) as? CookieCell {
+            cell.setData(cookie: cookieService.getCookies()[indexPath.item])
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width / 3.5, height: collectionView.frame.width / 3)
+    }
 }

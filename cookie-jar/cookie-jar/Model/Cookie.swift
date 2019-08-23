@@ -9,13 +9,13 @@
 import Foundation
 
 struct Cookie {
-    var title: String
-    var cost: Int
+    var name: String
+    var points: Int
     var imagePath: String
     
-    init(title: String, cost: Int, imagePath: String) {
-        self.title = title
-        self.cost = cost
+    init(name: String, points: Int, imagePath: String) {
+        self.name = name
+        self.points = points
         self.imagePath = imagePath
     }
 }
