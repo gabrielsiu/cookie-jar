@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToDoListViewController: UIViewController {
+final class ToDoListViewController: UIViewController {
     // MARK: Properties
     private let toDoListViewModel = ToDoListViewModel()
     

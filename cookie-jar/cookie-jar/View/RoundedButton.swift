@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoundedButton: UIButton {
+final class RoundedButton: UIButton {
     init(title: String, bgColor: CGColor) {
         super.init(frame: .zero)
         setTitleColor(.white, for: .normal)

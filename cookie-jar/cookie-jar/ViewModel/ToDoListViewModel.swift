@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToDoListViewModel {
+final class ToDoListViewModel {
     // MARK: Properties
     private var numPoints: Int = 0
     private var toDoList = [ToDoItem]()

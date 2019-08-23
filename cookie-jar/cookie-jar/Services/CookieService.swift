@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CookieService {
+final class CookieService {
     private let cookies = [
         Cookie(name: "Chocolate Chip", points: 1, imagePath: "icons8-cookie-100"),
         Cookie(name: "Macaroon", points: 2, imagePath: "icons8-macaron-100"),

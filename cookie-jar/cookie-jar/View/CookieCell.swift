@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CookieCell: UICollectionViewCell {
+final class CookieCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         return imageView

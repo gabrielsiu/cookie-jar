@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CookieTableView: UITableView {
+final class CookieTableView: UITableView {
     var maxHeight: CGFloat = UIScreen.main.bounds.size.height
     
     override func reloadData() {

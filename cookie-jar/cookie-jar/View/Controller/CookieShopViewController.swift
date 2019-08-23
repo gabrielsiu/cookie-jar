@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CookieShopViewController: UIViewController {
+final class CookieShopViewController: UIViewController {
     // MARK: Properties
     private let cookieService: CookieService
     

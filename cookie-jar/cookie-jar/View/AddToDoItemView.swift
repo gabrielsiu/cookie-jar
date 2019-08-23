@@ -12,7 +12,7 @@ protocol ToDoCreationDelegate {
     func createNewToDoItem(title: String, points: Int)
 }
 
-class AddToDoItemView: UIView {
+final class AddToDoItemView: UIView {
     // MARK: Properties
     var toDoCreationDelegate: ToDoCreationDelegate!
     var numPoints: Int!

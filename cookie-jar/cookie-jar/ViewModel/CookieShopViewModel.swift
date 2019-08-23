@@ -8,6 +8,6 @@
 
 import Foundation
 
-class CookieShopViewModel {
+final class CookieShopViewModel {
     
 }
