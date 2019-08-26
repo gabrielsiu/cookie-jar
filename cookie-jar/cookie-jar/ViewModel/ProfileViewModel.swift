@@ -9,10 +9,23 @@
 import Foundation
 
 final class ProfileViewModel {
-    // MARK: Properties
-    private var cookieList = [Cookie]()
+    private let dataService: DataService
     
+    init(dataService: DataService) {
+        self.dataService = dataService
+    }
+    
+    // MARK: Methods
     func getCookieList() -> [Cookie] {
-        return cookieList
+        return dataService.cookieList
+    }
+    
+    func getCurrentPointsString() -> String {
+        let numPoints = dataService.points
+        if numPoints == 1 {
+            return "You have \(numPoints) point to spend"
+        } else {
+            return "You have \(numPoints) points to spend"
+        }
     }
 }

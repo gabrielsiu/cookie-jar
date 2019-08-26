@@ -11,6 +11,12 @@ import UIKit
 class ModalPopupView: UIView {
     
     // MARK: Properties
+    let alphaView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        return view
+    }()
+    
     let container: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -21,15 +27,14 @@ class ModalPopupView: UIView {
     // MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateOut)))
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         self.frame = UIScreen.main.bounds
-        self.addSubview(container)
+        [alphaView, container].forEach { self.addSubview($0) }
         
-        container.centerView(yAnchor: self.centerYAnchor, xAnchor: self.centerXAnchor)
+        alphaView.setEdgeConstraints(top: self.topAnchor, bottom: self.bottomAnchor, leading: self.leadingAnchor, trailing: self.trailingAnchor)
         container.setSizeConstraints(size: nil, referenceHeight: self.heightAnchor, referenceWidth: self.widthAnchor, heightMultiplier: 0.4, widthMultiplier: 0.75)
+        container.centerView(yAnchor: self.centerYAnchor, xAnchor: self.centerXAnchor)
         
+        alphaView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateOut)))
         animateIn()
     }
     

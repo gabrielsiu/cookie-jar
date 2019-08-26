@@ -9,16 +9,16 @@
 import UIKit
 
 final class ToDoListViewModel {
-    // MARK: Properties
-    private var numPoints: Int = 0
-    private var toDoList = [ToDoItem]()
-    private var completedToDoList = [ToDoItem]()
-    private let defaults = UserDefaults.standard
+    private let dataService: DataService
+    
+    init(dataService: DataService) {
+        self.dataService = dataService
+    }
     
     // MARK: Methods
     func createToDoItem(title: String, points: Int) {
         let newToDoItem = ToDoItem(title: title, points: points)
-        toDoList.append(newToDoItem)
+        dataService.toDoList.append(newToDoItem)
         notifyTableViewNeedsUpdate()
     }
     
@@ -27,9 +27,9 @@ final class ToDoListViewModel {
         let row = indexPath.row
         
         if section == 0 {
-            toDoList.remove(at: row)
+            dataService.toDoList.remove(at: row)
         } else {
-            completedToDoList.remove(at: row)
+            dataService.completedToDoList.remove(at: row)
         }
     }
     
@@ -38,13 +38,13 @@ final class ToDoListViewModel {
         let row = indexPath.row
         
         if section == 0 {
-            toDoList[row].completed = !toDoList[row].completed
-            completedToDoList.append(toDoList[row])
-            toDoList.remove(at: row)
+            dataService.toDoList[row].completed = !dataService.toDoList[row].completed
+            dataService.completedToDoList.append(dataService.toDoList[row])
+            dataService.toDoList.remove(at: row)
         } else {
-            completedToDoList[row].completed = !completedToDoList[row].completed
-            toDoList.append(completedToDoList[row])
-            completedToDoList.remove(at: row)
+            dataService.completedToDoList[row].completed = !dataService.completedToDoList[row].completed
+            dataService.toDoList.append(dataService.completedToDoList[row])
+            dataService.completedToDoList.remove(at: row)
         }
         notifyTableViewNeedsUpdate()
     }
@@ -57,25 +57,25 @@ final class ToDoListViewModel {
         
         if prevSection == newSection {
             if prevSection == 0 {
-                let itemToMove = toDoList[prevRow]
-                toDoList.remove(at: prevRow)
-                toDoList.insert(itemToMove, at: newRow)
+                let itemToMove = dataService.toDoList[prevRow]
+                dataService.toDoList.remove(at: prevRow)
+                dataService.toDoList.insert(itemToMove, at: newRow)
             } else {
-                let itemToMove = completedToDoList[prevRow]
-                completedToDoList.remove(at: prevRow)
-                completedToDoList.insert(itemToMove, at: newRow)
+                let itemToMove = dataService.completedToDoList[prevRow]
+                dataService.completedToDoList.remove(at: prevRow)
+                dataService.completedToDoList.insert(itemToMove, at: newRow)
             }
         } else {
             if prevSection == 0 {
-                toDoList[prevRow].completed = !toDoList[prevRow].completed
-                let itemToMove = toDoList[prevRow]
-                toDoList.remove(at: prevRow)
-                completedToDoList.insert(itemToMove, at: newRow)
+                dataService.toDoList[prevRow].completed = !dataService.toDoList[prevRow].completed
+                let itemToMove = dataService.toDoList[prevRow]
+                dataService.toDoList.remove(at: prevRow)
+                dataService.completedToDoList.insert(itemToMove, at: newRow)
             } else {
-                completedToDoList[prevRow].completed = !completedToDoList[prevRow].completed
-                let itemToMove = completedToDoList[prevRow]
-                completedToDoList.remove(at: prevRow)
-                toDoList.insert(itemToMove, at: newRow)
+                dataService.completedToDoList[prevRow].completed = !dataService.completedToDoList[prevRow].completed
+                let itemToMove = dataService.completedToDoList[prevRow]
+                dataService.completedToDoList.remove(at: prevRow)
+                dataService.toDoList.insert(itemToMove, at: newRow)
             }
             notifyTableViewNeedsUpdate()
         }
@@ -87,11 +87,11 @@ final class ToDoListViewModel {
         var points: Int
         
         if section == 0 {
-            points = toDoList[row].points
-            numPoints += points
+            points = dataService.toDoList[row].points
+            dataService.points += points
         } else {
-            points = completedToDoList[row].points
-            numPoints -= points
+            points = dataService.completedToDoList[row].points
+            dataService.points -= points
         }
     }
     
@@ -103,11 +103,11 @@ final class ToDoListViewModel {
         
         if prevSection != newSection {
             if prevSection == 0 {
-                points = toDoList[prevRow].points
-                numPoints += points
+                points = dataService.toDoList[prevRow].points
+                dataService.points += points
             } else {
-                points = completedToDoList[prevRow].points
-                numPoints -= points
+                points = dataService.completedToDoList[prevRow].points
+                dataService.points -= points
             }
         }
     }
@@ -117,11 +117,11 @@ final class ToDoListViewModel {
     }
     
     func getToDoList() -> [ToDoItem] {
-        return toDoList
+        return dataService.toDoList
     }
     
     func getCompletedToDoList() -> [ToDoItem] {
-        return completedToDoList
+        return dataService.completedToDoList
     }
     
     func getAccessoryType(completed: Bool) -> UITableViewCell.AccessoryType {
@@ -133,7 +133,7 @@ final class ToDoListViewModel {
     }
     
     func getCurrentPointsString() -> String {
-         return getPointsString(numPoints: numPoints)
+         return getPointsString(numPoints: dataService.points)
     }
     
     func getPointsString(numPoints: Int) -> String {

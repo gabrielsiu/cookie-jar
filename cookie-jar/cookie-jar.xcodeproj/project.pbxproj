@@ -14,6 +14,8 @@
 		DA4308EC230F9C2D00B1CA8D /* CookieShopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308EB230F9C2D00B1CA8D /* CookieShopViewModel.swift */; };
 		DA4308EE2310ECC800B1CA8D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308ED2310ECC800B1CA8D /* AboutView.swift */; };
 		DA4308F02310EDCD00B1CA8D /* ModalPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308EF2310EDCD00B1CA8D /* ModalPopupView.swift */; };
+		DA4308F3231385B900B1CA8D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308F2231385B900B1CA8D /* Constants.swift */; };
+		DA4308F52313892300B1CA8D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308F42313892300B1CA8D /* DataService.swift */; };
 		DA44B8B62307C52300050E58 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */; };
 		DA44B8B82307C6E600050E58 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B72307C6E600050E58 /* ProfileViewController.swift */; };
 		DA44B8BA2308672E00050E58 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B92308672E00050E58 /* ProfileViewModel.swift */; };
@@ -36,6 +38,8 @@
 		DA4308EB230F9C2D00B1CA8D /* CookieShopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieShopViewModel.swift; sourceTree = "<group>"; };
 		DA4308ED2310ECC800B1CA8D /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		DA4308EF2310EDCD00B1CA8D /* ModalPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPopupView.swift; sourceTree = "<group>"; };
+		DA4308F2231385B900B1CA8D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DA4308F42313892300B1CA8D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
 		DA44B8B72307C6E600050E58 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DA44B8B92308672E00050E58 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -77,8 +81,17 @@
 			isa = PBXGroup;
 			children = (
 				DA4308E9230F8F1A00B1CA8D /* CookieService.swift */,
+				DA4308F42313892300B1CA8D /* DataService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		DA4308F12313859C00B1CA8D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DA4308F2231385B900B1CA8D /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		DA8F283D22FBCABE00B32254 = {
@@ -101,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				DA4308E8230F8F0900B1CA8D /* Services */,
+				DA4308F12313859C00B1CA8D /* Utilities */,
 				DA8F285E22FE726000B32254 /* Model */,
 				DA8F285D22FE725A00B32254 /* View */,
 				DA8F285C22FE725000B32254 /* ViewModel */,
@@ -230,6 +244,7 @@
 				DA8F284C22FBCABE00B32254 /* ToDoListViewController.swift in Sources */,
 				DA8F284A22FBCABE00B32254 /* AppDelegate.swift in Sources */,
 				DA8F287122FF915F00B32254 /* AddToDoItemView.swift in Sources */,
+				DA4308F52313892300B1CA8D /* DataService.swift in Sources */,
 				DA1CC202230E3B4C00EA7338 /* CookieShopViewController.swift in Sources */,
 				DA44B8BC230869FF00050E58 /* RoundedButton.swift in Sources */,
 				DA4308EC230F9C2D00B1CA8D /* CookieShopViewModel.swift in Sources */,
@@ -241,6 +256,7 @@
 				DA4308E7230F8ACF00B1CA8D /* CookieCell.swift in Sources */,
 				DA44B8BA2308672E00050E58 /* ProfileViewModel.swift in Sources */,
 				DA8F286722FF45B600B32254 /* UIView+Constraints.swift in Sources */,
+				DA4308F3231385B900B1CA8D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,19 +10,18 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     // MARK: Properties
-    private let profileViewModel = ProfileViewModel()
+    private let profileViewModel: ProfileViewModel
     
     private let greetingLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
-        label.text = "Hello, Gabriel"
+        label.text = "Your Profile"
         return label
     }()
     
     private let pointsLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .light)
-        label.text = "You have 5 points to spend"
         return label
     }()
     
@@ -66,6 +65,15 @@ final class ProfileViewController: UIViewController {
     }()
     
     // MARK: Lifecycle
+    init(dataService: DataService) {
+        profileViewModel = ProfileViewModel(dataService: dataService)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -76,6 +84,8 @@ final class ProfileViewController: UIViewController {
         labelStack.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: cookieTableView.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 20, right: 16))
         cookieTableView.setEdgeConstraints(top: labelStack.bottomAnchor, bottom: buttonStack.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 20, right: 0))
         buttonStack.setEdgeConstraints(top: cookieTableView.bottomAnchor, bottom: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 20, right: 16))
+        
+        pointsLabel.text = profileViewModel.getCurrentPointsString()
     }
     
     deinit {

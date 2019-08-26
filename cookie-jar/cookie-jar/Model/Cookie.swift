@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Cookie {
+struct Cookie: Codable {
     var name: String
     var points: Int
     var imagePath: String

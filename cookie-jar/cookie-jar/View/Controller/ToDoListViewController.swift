@@ -10,9 +10,7 @@ import UIKit
 
 final class ToDoListViewController: UIViewController {
     // MARK: Properties
-    private let toDoListViewModel = ToDoListViewModel()
-    
-    private var pointsString: String = "0 points"
+    private let toDoListViewModel: ToDoListViewModel
     
     private var tableView: UITableView = {
         let tableView = UITableView()
@@ -22,6 +20,15 @@ final class ToDoListViewController: UIViewController {
     }()
     
     // MARK: Lifecycle
+    init() {
+        toDoListViewModel = ToDoListViewModel(dataService: DataService(defaults: UserDefaults.standard))
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavBar()
@@ -34,8 +41,9 @@ final class ToDoListViewController: UIViewController {
     }
     
     private func setUpNavBar() {
+        let currentPoints = toDoListViewModel.getCurrentPointsString()
         let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToDoItem))
-        let profileItem = UIBarButtonItem(title: pointsString, style: .plain, target: self, action: #selector(presentProfilePopup))
+        let profileItem = UIBarButtonItem(title: currentPoints, style: .plain, target: self, action: #selector(presentProfilePopup))
         
         navigationItem.rightBarButtonItems = [addItem, editButtonItem]
         navigationItem.leftBarButtonItem = profileItem
@@ -64,7 +72,7 @@ final class ToDoListViewController: UIViewController {
     }
     
     @objc func presentProfilePopup() {
-        let profileVC = ProfileViewController()
+        let profileVC = ProfileViewController(dataService: DataService(defaults: UserDefaults.standard))
         let navController = UINavigationController(rootViewController: profileVC)
         present(navController, animated: true, completion: nil)
     }
