@@ -11,16 +11,19 @@ import UIKit
 final class CookieCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     private let name: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         return label
     }()
     
     private let points: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         return label
     }()
     
@@ -41,7 +44,6 @@ final class CookieCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // FIXME: Refactor to go thru view model
     func setData(cookie: Cookie) {
         name.text = cookie.name
         points.text = "\(cookie.points) points"

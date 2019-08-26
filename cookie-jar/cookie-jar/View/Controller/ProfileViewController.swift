@@ -41,19 +41,25 @@ final class ProfileViewController: UIViewController {
     }()
     
     private let shopButton: RoundedButton = {
-        let button = RoundedButton(title: "Cookie Shop", bgColor: UIColor.brown.cgColor)
+        let button = RoundedButton(title: "Cookie Shop", textColor: .brown)
         button.addTarget(nil, action: #selector(toCookieShopVC), for: .touchUpInside)
         return button
     }()
     
     private let resetButton: RoundedButton = {
-        let button = RoundedButton(title: "Reset data", bgColor: UIColor.red.cgColor)
+        let button = RoundedButton(title: "Reset data", textColor: .red)
         button.addTarget(nil, action: #selector(toResetDataView), for: .touchUpInside)
         return button
     }()
     
+    private let aboutButton: RoundedButton = {
+        let button = RoundedButton(title: "About", textColor: .black)
+        button.addTarget(nil, action: #selector(toAboutView), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var buttonStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [shopButton, resetButton])
+        let stackView = UIStackView(arrangedSubviews: [shopButton, resetButton, aboutButton])
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
@@ -88,6 +94,10 @@ final class ProfileViewController: UIViewController {
     
     @objc func toResetDataView() {
         
+    }
+    
+    @objc func toAboutView() {
+        self.view.addSubview(AboutView())
     }
 }
 

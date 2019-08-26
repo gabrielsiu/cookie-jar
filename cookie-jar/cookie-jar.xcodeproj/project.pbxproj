@@ -12,6 +12,8 @@
 		DA4308E7230F8ACF00B1CA8D /* CookieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308E6230F8ACF00B1CA8D /* CookieCell.swift */; };
 		DA4308EA230F8F1A00B1CA8D /* CookieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308E9230F8F1A00B1CA8D /* CookieService.swift */; };
 		DA4308EC230F9C2D00B1CA8D /* CookieShopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308EB230F9C2D00B1CA8D /* CookieShopViewModel.swift */; };
+		DA4308EE2310ECC800B1CA8D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308ED2310ECC800B1CA8D /* AboutView.swift */; };
+		DA4308F02310EDCD00B1CA8D /* ModalPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308EF2310EDCD00B1CA8D /* ModalPopupView.swift */; };
 		DA44B8B62307C52300050E58 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */; };
 		DA44B8B82307C6E600050E58 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B72307C6E600050E58 /* ProfileViewController.swift */; };
 		DA44B8BA2308672E00050E58 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B92308672E00050E58 /* ProfileViewModel.swift */; };
@@ -32,6 +34,8 @@
 		DA4308E6230F8ACF00B1CA8D /* CookieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieCell.swift; sourceTree = "<group>"; };
 		DA4308E9230F8F1A00B1CA8D /* CookieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieService.swift; sourceTree = "<group>"; };
 		DA4308EB230F9C2D00B1CA8D /* CookieShopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieShopViewModel.swift; sourceTree = "<group>"; };
+		DA4308ED2310ECC800B1CA8D /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		DA4308EF2310EDCD00B1CA8D /* ModalPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPopupView.swift; sourceTree = "<group>"; };
 		DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
 		DA44B8B72307C6E600050E58 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DA44B8B92308672E00050E58 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -123,10 +127,12 @@
 			isa = PBXGroup;
 			children = (
 				DA1CC203230E3BF900EA7338 /* Controller */,
+				DA4308EF2310EDCD00B1CA8D /* ModalPopupView.swift */,
 				DA44B8BB230869FF00050E58 /* RoundedButton.swift */,
-				DA8F287022FF915F00B32254 /* AddToDoItemView.swift */,
 				DA1CC1FF230E298D00EA7338 /* CookieTableView.swift */,
 				DA4308E6230F8ACF00B1CA8D /* CookieCell.swift */,
+				DA8F287022FF915F00B32254 /* AddToDoItemView.swift */,
+				DA4308ED2310ECC800B1CA8D /* AboutView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -218,6 +224,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA4308EE2310ECC800B1CA8D /* AboutView.swift in Sources */,
+				DA4308F02310EDCD00B1CA8D /* ModalPopupView.swift in Sources */,
 				DA44B8B62307C52300050E58 /* ToDoListViewModel.swift in Sources */,
 				DA8F284C22FBCABE00B32254 /* ToDoListViewController.swift in Sources */,
 				DA8F284A22FBCABE00B32254 /* AppDelegate.swift in Sources */,

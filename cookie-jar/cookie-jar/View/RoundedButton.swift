@@ -9,12 +9,15 @@
 import UIKit
 
 final class RoundedButton: UIButton {
-    init(title: String, bgColor: CGColor) {
+    init(title: String, textColor: UIColor) {
         super.init(frame: .zero)
-        setTitleColor(.white, for: .normal)
+        setTitleColor(textColor, for: .normal)
         setTitle(title, for: .normal)
-        layer.backgroundColor = bgColor
+        layer.backgroundColor = UIColor.white.cgColor
         layer.cornerRadius = 5
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 1, height: 1)
+        layer.shadowOpacity = 0.3
     }
     
     required init?(coder aDecoder: NSCoder) {
