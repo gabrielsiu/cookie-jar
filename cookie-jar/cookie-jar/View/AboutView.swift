@@ -34,7 +34,6 @@ final class AboutView: ModalPopupView {
     private let creditTextView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
-        //textView.isUserInteractionEnabled = false
         
         let attributedString = NSMutableAttributedString(string: "Icons8 for all icons and app icon")
         let url = URL(string: "https://icons8.com")

@@ -12,7 +12,7 @@ protocol ToDoCreationDelegate {
     func createNewToDoItem(title: String, points: Int)
 }
 
-final class AddToDoItemView: UIView {
+final class AddToDoItemView: ModalPopupView {
     // MARK: Properties
     var toDoCreationDelegate: ToDoCreationDelegate!
     var numPoints: Int!
@@ -69,56 +69,20 @@ final class AddToDoItemView: UIView {
         return stackView
     }()
     
-    private let container: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 10
-        return view
-    }()
-    
     // MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateOut)))
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        self.frame = UIScreen.main.bounds
-        
-        self.addSubview(container)
         [topStack, bottomStack].forEach { container.addSubview($0) }
         
-        container.centerView(yAnchor: self.centerYAnchor, xAnchor: self.centerXAnchor)
-        container.setSizeConstraints(size: nil, referenceHeight: self.heightAnchor, referenceWidth: self.widthAnchor, heightMultiplier: 0.4, widthMultiplier: 0.75)
         topStack.setEdgeConstraints(top: container.topAnchor, bottom: nil, leading: container.leadingAnchor, trailing: container.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 0, right: 16))
         bottomStack.setEdgeConstraints(top: nil, bottom: container.bottomAnchor, leading: container.leadingAnchor, trailing: container.trailingAnchor, padding: .init(top: 0, left: 16, bottom: 20, right: 16))
         
         numPoints = 1
-        animateIn()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: Animations
-    @objc private func animateIn() {
-        self.container.transform = CGAffineTransform(translationX: 0, y: -self.frame.height)
-        self.alpha = 0
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-            self.container.transform = .identity
-            self.alpha = 1
-        })
-    }
-    
-    @objc private func animateOut() {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-            self.container.transform = CGAffineTransform(translationX: 0, y: -self.frame.height)
-            self.alpha = 0
-        }) { (complete) in
-            if complete {
-                self.removeFromSuperview()
-            }
-        }
     }
     
     // MARK: Actions
