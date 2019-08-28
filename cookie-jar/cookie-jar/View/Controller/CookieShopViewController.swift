@@ -10,7 +10,7 @@ import UIKit
 
 final class CookieShopViewController: UIViewController {
     // MARK: Properties
-    private let cookieService: CookieService
+    private let cookieShopViewModel: CookieShopViewModel
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -22,7 +22,6 @@ final class CookieShopViewController: UIViewController {
     private let pointsLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .light)
-        label.text = "Points: 5"
         return label
     }()
     
@@ -43,8 +42,8 @@ final class CookieShopViewController: UIViewController {
     }()
     
     // MARK: Lifecycle
-    init(cookieService: CookieService) {
-        self.cookieService = cookieService
+    init(dataService: DataService) {
+        cookieShopViewModel = CookieShopViewModel(dataService: dataService, cookieService: CookieService())
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -61,18 +60,20 @@ final class CookieShopViewController: UIViewController {
         
         labelStack.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: cookieCollectionView.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 20, right: 16))
         cookieCollectionView.setEdgeConstraints(top: labelStack.bottomAnchor, bottom: view.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 0, right: 16))
+        
+        pointsLabel.text = cookieShopViewModel.getCurrentPointsString()
     }
 }
 
 // MARK: - Delegate Methods
 extension CookieShopViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cookieService.getCookies().count
+        return cookieShopViewModel.getCookies().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CookieCell", for: indexPath) as? CookieCell {
-            cell.setData(cookie: cookieService.getCookies()[indexPath.item])
+            cell.setData(cookie: cookieShopViewModel.getCookies()[indexPath.row])
             return cell
         } else {
             return UICollectionViewCell()
@@ -81,5 +82,9 @@ extension CookieShopViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width / 3.5, height: collectionView.frame.width / 2)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.view.addSubview(PurchaseConfirmationView(index: indexPath.item))
     }
 }

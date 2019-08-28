@@ -98,7 +98,7 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc func toCookieShopVC() {
-        let cookieShopVC = CookieShopViewController(cookieService: CookieService())
+        let cookieShopVC = CookieShopViewController(dataService: DataService(defaults: UserDefaults.standard))
         self.navigationController?.pushViewController(cookieShopVC, animated: true)
     }
     

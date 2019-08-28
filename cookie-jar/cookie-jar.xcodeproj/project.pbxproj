@@ -16,6 +16,8 @@
 		DA4308F02310EDCD00B1CA8D /* ModalPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308EF2310EDCD00B1CA8D /* ModalPopupView.swift */; };
 		DA4308F3231385B900B1CA8D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308F2231385B900B1CA8D /* Constants.swift */; };
 		DA4308F52313892300B1CA8D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308F42313892300B1CA8D /* DataService.swift */; };
+		DA4308F82316090400B1CA8D /* PurchaseConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308F72316090400B1CA8D /* PurchaseConfirmationView.swift */; };
+		DA4308FA23160CF600B1CA8D /* PurchaseConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4308F923160CF600B1CA8D /* PurchaseConfirmationViewModel.swift */; };
 		DA44B8B62307C52300050E58 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */; };
 		DA44B8B82307C6E600050E58 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B72307C6E600050E58 /* ProfileViewController.swift */; };
 		DA44B8BA2308672E00050E58 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA44B8B92308672E00050E58 /* ProfileViewModel.swift */; };
@@ -40,6 +42,8 @@
 		DA4308EF2310EDCD00B1CA8D /* ModalPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPopupView.swift; sourceTree = "<group>"; };
 		DA4308F2231385B900B1CA8D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DA4308F42313892300B1CA8D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		DA4308F72316090400B1CA8D /* PurchaseConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseConfirmationView.swift; sourceTree = "<group>"; };
+		DA4308F923160CF600B1CA8D /* PurchaseConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseConfirmationViewModel.swift; sourceTree = "<group>"; };
 		DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
 		DA44B8B72307C6E600050E58 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DA44B8B92308672E00050E58 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -94,6 +98,17 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		DA4308F6231608A000B1CA8D /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				DA4308EF2310EDCD00B1CA8D /* ModalPopupView.swift */,
+				DA8F287022FF915F00B32254 /* AddToDoItemView.swift */,
+				DA4308ED2310ECC800B1CA8D /* AboutView.swift */,
+				DA4308F72316090400B1CA8D /* PurchaseConfirmationView.swift */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
 		DA8F283D22FBCABE00B32254 = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +148,7 @@
 				DA44B8B52307C52300050E58 /* ToDoListViewModel.swift */,
 				DA44B8B92308672E00050E58 /* ProfileViewModel.swift */,
 				DA4308EB230F9C2D00B1CA8D /* CookieShopViewModel.swift */,
+				DA4308F923160CF600B1CA8D /* PurchaseConfirmationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -141,12 +157,10 @@
 			isa = PBXGroup;
 			children = (
 				DA1CC203230E3BF900EA7338 /* Controller */,
-				DA4308EF2310EDCD00B1CA8D /* ModalPopupView.swift */,
+				DA4308F6231608A000B1CA8D /* Modals */,
 				DA44B8BB230869FF00050E58 /* RoundedButton.swift */,
 				DA1CC1FF230E298D00EA7338 /* CookieTableView.swift */,
 				DA4308E6230F8ACF00B1CA8D /* CookieCell.swift */,
-				DA8F287022FF915F00B32254 /* AddToDoItemView.swift */,
-				DA4308ED2310ECC800B1CA8D /* AboutView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -238,8 +252,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA4308F82316090400B1CA8D /* PurchaseConfirmationView.swift in Sources */,
 				DA4308EE2310ECC800B1CA8D /* AboutView.swift in Sources */,
 				DA4308F02310EDCD00B1CA8D /* ModalPopupView.swift in Sources */,
+				DA4308FA23160CF600B1CA8D /* PurchaseConfirmationViewModel.swift in Sources */,
 				DA44B8B62307C52300050E58 /* ToDoListViewModel.swift in Sources */,
 				DA8F284C22FBCABE00B32254 /* ToDoListViewController.swift in Sources */,
 				DA8F284A22FBCABE00B32254 /* AppDelegate.swift in Sources */,
