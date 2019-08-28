@@ -14,7 +14,7 @@ final class ToDoListViewController: UIViewController {
     
     private var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ToDoItemCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: TO_DO_ITEM_IDENTIFIER)
         tableView.endEditing(true)
         return tableView
     }()
@@ -37,7 +37,8 @@ final class ToDoListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: view.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name(rawValue: "toDoListChanged"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name(rawValue: NOTIF_TO_DO_LIST_CHANGED), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePointsLabel), name: Notification.Name(rawValue: NOTIF_COOKIE_PURCHASED), object: nil)
     }
     
     private func setUpNavBar() {
@@ -55,14 +56,14 @@ final class ToDoListViewController: UIViewController {
     }
     
     // MARK: Actions
-    func updatePointsLabel() {
-        guard let item = navigationItem.leftBarButtonItem else { return }
-        item.title = toDoListViewModel.getCurrentPointsString()
-    }
-    
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
+    }
+    
+    @objc func updatePointsLabel() {
+        guard let item = navigationItem.leftBarButtonItem else { return }
+        item.title = toDoListViewModel.getCurrentPointsString()
     }
     
     @objc func addToDoItem() {
@@ -105,8 +106,8 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             toDoItem = toDoListViewModel.getCompletedToDoList()[indexPath.row]
         }
-        var cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
-        cell = UITableViewCell(style: .value1, reuseIdentifier: "ToDoItemCell")
+        var cell = tableView.dequeueReusableCell(withIdentifier: TO_DO_ITEM_IDENTIFIER, for: indexPath)
+        cell = UITableViewCell(style: .value1, reuseIdentifier: TO_DO_ITEM_IDENTIFIER)
         cell.textLabel?.text = toDoItem.title
         cell.detailTextLabel?.text = toDoListViewModel.getPointsString(numPoints: toDoItem.points)
         cell.accessoryType = toDoListViewModel.getAccessoryType(completed: toDoItem.completed)

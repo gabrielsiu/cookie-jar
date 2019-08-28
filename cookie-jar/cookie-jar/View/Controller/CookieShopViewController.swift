@@ -36,7 +36,7 @@ final class CookieShopViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.register(CookieCell.self, forCellWithReuseIdentifier: "CookieCell")
+        collectionView.register(CookieCell.self, forCellWithReuseIdentifier: COOKIE_SHOP_ITEM_IDENTIFIER)
         collectionView.backgroundColor = .white
         return collectionView
     }()
@@ -62,6 +62,18 @@ final class CookieShopViewController: UIViewController {
         cookieCollectionView.setEdgeConstraints(top: labelStack.bottomAnchor, bottom: view.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 0, right: 16))
         
         pointsLabel.text = cookieShopViewModel.getCurrentPointsString()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshPointsLabel), name: Notification.Name(rawValue: NOTIF_COOKIE_PURCHASED), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("CookieShopViewController deinit")
+    }
+    
+    // MARK: Actions
+    @objc func refreshPointsLabel() {
+        pointsLabel.text = cookieShopViewModel.getCurrentPointsString()
     }
 }
 
@@ -72,7 +84,7 @@ extension CookieShopViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CookieCell", for: indexPath) as? CookieCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: COOKIE_SHOP_ITEM_IDENTIFIER, for: indexPath) as? CookieCell {
             cell.setData(cookie: cookieShopViewModel.getCookies()[indexPath.row])
             return cell
         } else {

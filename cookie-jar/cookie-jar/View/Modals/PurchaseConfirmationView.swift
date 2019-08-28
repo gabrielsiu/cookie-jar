@@ -87,7 +87,12 @@ final class PurchaseConfirmationView: ModalPopupView {
     }
     
     @objc private func purchaseButtonPressed() {
-        purchaseConfirmationViewModel.purchaseCookie()
-        animateOut()
+        if purchaseConfirmationViewModel.canPurchaseCookie() {
+            purchaseConfirmationViewModel.purchaseCookie()
+            animateOut()
+        } else {
+            animateOut()
+        }
+        
     }
 }

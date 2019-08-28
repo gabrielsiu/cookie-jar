@@ -113,7 +113,7 @@ final class ToDoListViewModel {
     }
     
     func notifyTableViewNeedsUpdate() {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "toDoListChanged"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_TO_DO_LIST_CHANGED), object: nil)
     }
     
     func getToDoList() -> [ToDoItem] {

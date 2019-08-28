@@ -36,10 +36,18 @@ final class PurchaseConfirmationViewModel {
         return cookieService.cookies[index].imagePath
     }
     
-    func purchaseCookie() {
-        let purchasedCookie = cookieService.cookies[index]
-        if (dataService.points - purchasedCookie.points) >= 0 {
-            dataService.points -= purchasedCookie.points
+    func canPurchaseCookie() -> Bool {
+        let currentPoints = dataService.points
+        let requiredPoints = cookieService.cookies[index].points
+        if currentPoints - requiredPoints < 0 {
+            return false
         }
+        return true
+    }
+    
+    func purchaseCookie() {
+        dataService.cookieList.append(cookieService.cookies[index])
+        dataService.points -= cookieService.cookies[index].points
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_COOKIE_PURCHASED), object: nil)
     }
 }

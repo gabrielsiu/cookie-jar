@@ -34,7 +34,10 @@ final class ProfileViewController: UIViewController {
     
     private var cookieTableView: CookieTableView = {
         let tableView = CookieTableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CookieCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: PURCHASED_COOKIE_IDENTIFIER)
+        tableView.isScrollEnabled = false
+        tableView.allowsSelection = false
+        tableView.separatorStyle = .none
         tableView.maxHeight = 500
         return tableView
     }()
@@ -86,9 +89,12 @@ final class ProfileViewController: UIViewController {
         buttonStack.setEdgeConstraints(top: cookieTableView.bottomAnchor, bottom: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 20, right: 16))
         
         pointsLabel.text = profileViewModel.getCurrentPointsString()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshViews), name: Notification.Name(rawValue: NOTIF_COOKIE_PURCHASED), object: nil)
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         print("ProfileViewController deinit")
     }
     
@@ -109,6 +115,11 @@ final class ProfileViewController: UIViewController {
     @objc func toAboutView() {
         self.view.addSubview(AboutView())
     }
+    
+    @objc func refreshViews() {
+        pointsLabel.text = profileViewModel.getCurrentPointsString()
+        cookieTableView.reloadData()
+    }
 }
 
 // MARK: - Delegate Methods
@@ -118,10 +129,37 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if profileViewModel.getCookieList().count == 0 {
+            return 1 // Show a "You currently have no purchased cookies" cell if no cookies have been purchased
+        }
         return profileViewModel.getCookieList().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        var cell = tableView.dequeueReusableCell(withIdentifier: PURCHASED_COOKIE_IDENTIFIER, for: indexPath)
+        if profileViewModel.getCookieList().count == 0 {
+            cell.textLabel?.text = "You currently have no purchased cookies"
+        } else {
+            cell = UITableViewCell(style: .value1, reuseIdentifier: PURCHASED_COOKIE_IDENTIFIER)
+            cell.textLabel?.text = profileViewModel.getCookieList()[indexPath.row].name
+            cell.imageView?.image = UIImage(named: profileViewModel.getCookieList()[indexPath.row].imagePath)
+        }
+        return cell
+    }
+}
+
+// MARK: - Self-Sizing UITableView
+final class CookieTableView: UITableView {
+    var maxHeight: CGFloat = UIScreen.main.bounds.size.height
+    
+    override func reloadData() {
+      super.reloadData()
+      self.invalidateIntrinsicContentSize()
+      self.layoutIfNeeded()
+    }
+    
+    override var intrinsicContentSize: CGSize {
+      let height = min(contentSize.height, maxHeight)
+      return CGSize(width: contentSize.width, height: height)
     }
 }
