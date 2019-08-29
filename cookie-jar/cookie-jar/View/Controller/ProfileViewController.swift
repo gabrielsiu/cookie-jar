@@ -12,6 +12,11 @@ final class ProfileViewController: UIViewController {
     // MARK: Properties
     private let profileViewModel: ProfileViewModel
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
     private let greetingLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
@@ -38,7 +43,6 @@ final class ProfileViewController: UIViewController {
         tableView.isScrollEnabled = false
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
-        tableView.maxHeight = 500
         return tableView
     }()
     
@@ -80,13 +84,17 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        [labelStack, cookieTableView, buttonStack].forEach { view.addSubview($0) }
+        view.addSubview(scrollView)
+        scrollView.setEdgeConstraints(top: view.topAnchor, bottom: view.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        [labelStack, cookieTableView, buttonStack].forEach { scrollView.addSubview($0) }
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissScreen))
         cookieTableView.delegate = self
         cookieTableView.dataSource = self
-        labelStack.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: cookieTableView.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 20, right: 16))
-        cookieTableView.setEdgeConstraints(top: labelStack.bottomAnchor, bottom: buttonStack.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 20, right: 0))
-        buttonStack.setEdgeConstraints(top: cookieTableView.bottomAnchor, bottom: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 20, right: 16))
+        
+        labelStack.setEdgeConstraints(top: scrollView.topAnchor, bottom: cookieTableView.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 20, right: 16))
+        cookieTableView.setEdgeConstraints(top: labelStack.bottomAnchor, bottom: buttonStack.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 20, right: 0))
+        buttonStack.setEdgeConstraints(top: cookieTableView.bottomAnchor, bottom: scrollView.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 20, right: 16))
         
         pointsLabel.text = profileViewModel.getCurrentPointsString()
         
@@ -168,8 +176,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - Self-Sizing UITableView
 final class CookieTableView: UITableView {
-    var maxHeight: CGFloat = UIScreen.main.bounds.size.height
-    
     override func reloadData() {
       super.reloadData()
       self.invalidateIntrinsicContentSize()
@@ -177,7 +183,6 @@ final class CookieTableView: UITableView {
     }
     
     override var intrinsicContentSize: CGSize {
-      let height = min(contentSize.height, maxHeight)
-      return CGSize(width: contentSize.width, height: height)
+        return CGSize(width: contentSize.width, height: contentSize.height)
     }
 }
