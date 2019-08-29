@@ -15,7 +15,8 @@ let COOKIE_SHOP_ITEM_IDENTIFIER = "CookieShopCell"
 
 // Notifications
 let NOTIF_TO_DO_LIST_CHANGED = "toDoListChanged"
-let NOTIF_COOKIE_PURCHASED = "cookiePurchased"
+let NOTIF_POINTS_CHANGED = "pointsChanged"
+let NOTIF_COOKIE_LIST_CHANGED = "cookieListChanged"
 
 // User Defaults
 let POINTS_KEY = "points"

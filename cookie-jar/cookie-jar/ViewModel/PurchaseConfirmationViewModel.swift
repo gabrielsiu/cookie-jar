@@ -48,6 +48,7 @@ final class PurchaseConfirmationViewModel {
     func purchaseCookie() {
         dataService.cookieList.append(cookieService.cookies[index])
         dataService.points -= cookieService.cookies[index].points
-        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_COOKIE_PURCHASED), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_POINTS_CHANGED), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_COOKIE_LIST_CHANGED), object: nil)
     }
 }

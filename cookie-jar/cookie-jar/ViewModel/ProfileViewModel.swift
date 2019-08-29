@@ -28,4 +28,20 @@ final class ProfileViewModel {
             return "You have \(numPoints) points to spend"
         }
     }
+    
+    func resetPoints() {
+        dataService.points = 0
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_POINTS_CHANGED), object: nil)
+    }
+    
+    func resetCookieList() {
+        dataService.cookieList.removeAll()
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_COOKIE_LIST_CHANGED), object: nil)
+    }
+    
+    func resetToDoList() {
+        dataService.toDoList.removeAll()
+        dataService.completedToDoList.removeAll()
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_TO_DO_LIST_CHANGED), object: nil)
+    }
 }

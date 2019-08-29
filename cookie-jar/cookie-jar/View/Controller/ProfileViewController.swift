@@ -90,7 +90,8 @@ final class ProfileViewController: UIViewController {
         
         pointsLabel.text = profileViewModel.getCurrentPointsString()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshViews), name: Notification.Name(rawValue: NOTIF_COOKIE_PURCHASED), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshViews), name: Notification.Name(rawValue: NOTIF_POINTS_CHANGED), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshViews), name: Notification.Name(rawValue: NOTIF_COOKIE_LIST_CHANGED), object: nil)
     }
     
     deinit {
@@ -109,7 +110,23 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc func toResetDataView() {
-        
+        let actionSheet = UIAlertController(title: "Which data do you want to reset?", message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Reset points", style: .destructive, handler: { (action) in
+            self.profileViewModel.resetPoints()
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Reset cookies purchased", style: .destructive, handler: { (action) in
+            self.profileViewModel.resetCookieList()
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Reset to-do list", style: .destructive, handler: { (action) in
+            self.profileViewModel.resetToDoList()
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Reset all data", style: .destructive, handler: { (action) in
+            self.profileViewModel.resetPoints()
+            self.profileViewModel.resetCookieList()
+            self.profileViewModel.resetToDoList()
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
     @objc func toAboutView() {
@@ -139,6 +156,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         var cell = tableView.dequeueReusableCell(withIdentifier: PURCHASED_COOKIE_IDENTIFIER, for: indexPath)
         if profileViewModel.getCookieList().count == 0 {
             cell.textLabel?.text = "You currently have no purchased cookies"
+            cell.imageView?.image = nil
         } else {
             cell = UITableViewCell(style: .value1, reuseIdentifier: PURCHASED_COOKIE_IDENTIFIER)
             cell.textLabel?.text = profileViewModel.getCookieList()[indexPath.row].name

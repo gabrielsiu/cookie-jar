@@ -38,7 +38,7 @@ final class ToDoListViewController: UIViewController {
         tableView.dataSource = self
         tableView.setEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor, bottom: view.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Notification.Name(rawValue: NOTIF_TO_DO_LIST_CHANGED), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updatePointsLabel), name: Notification.Name(rawValue: NOTIF_COOKIE_PURCHASED), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePointsLabel), name: Notification.Name(rawValue: NOTIF_POINTS_CHANGED), object: nil)
     }
     
     private func setUpNavBar() {

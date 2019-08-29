@@ -63,7 +63,7 @@ final class CookieShopViewController: UIViewController {
         
         pointsLabel.text = cookieShopViewModel.getCurrentPointsString()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshPointsLabel), name: Notification.Name(rawValue: NOTIF_COOKIE_PURCHASED), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshPointsLabel), name: Notification.Name(rawValue: NOTIF_POINTS_CHANGED), object: nil)
     }
     
     deinit {
