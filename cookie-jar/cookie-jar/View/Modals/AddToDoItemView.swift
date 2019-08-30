@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol ToDoCreationDelegate {
+protocol ToDoCreationDelegate: class {
     func createNewToDoItem(title: String, points: Int)
 }
 
 final class AddToDoItemView: ModalPopupView {
     // MARK: Properties
-    var toDoCreationDelegate: ToDoCreationDelegate!
+    weak var toDoCreationDelegate: ToDoCreationDelegate!
     var numPoints: Int!
     
     private let titleLabel: UILabel = {
@@ -72,12 +72,9 @@ final class AddToDoItemView: ModalPopupView {
     // MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         [topStack, bottomStack].forEach { container.addSubview($0) }
-        
         topStack.setEdgeConstraints(top: container.topAnchor, bottom: nil, leading: container.leadingAnchor, trailing: container.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 0, right: 16))
         bottomStack.setEdgeConstraints(top: nil, bottom: container.bottomAnchor, leading: container.leadingAnchor, trailing: container.trailingAnchor, padding: .init(top: 0, left: 16, bottom: 20, right: 16))
-        
         numPoints = 1
     }
     

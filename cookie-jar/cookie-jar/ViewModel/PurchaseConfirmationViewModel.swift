@@ -19,6 +19,7 @@ final class PurchaseConfirmationViewModel {
         self.index = index
     }
     
+    // MARK: Methods
     func getConfirmationText(index: Int) -> String {
         let cookieName = cookieService.cookies[index].name
         let numPoints = cookieService.cookies[index].points

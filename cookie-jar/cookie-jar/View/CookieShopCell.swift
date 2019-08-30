@@ -1,5 +1,5 @@
 //
-//  CookieCell.swift
+//  CookieShopCell.swift
 //  cookie-jar
 //
 //  Created by Gabriel Siu on 2019-08-22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CookieCell: UICollectionViewCell {
+final class CookieShopCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -37,6 +37,7 @@ final class CookieCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.contentView.addSubview(stack)
+        imageView.setSizeConstraints(size: nil, referenceHeight: name.widthAnchor, referenceWidth: name.widthAnchor)
         stack.setEdgeConstraints(top: contentView.topAnchor, bottom: contentView.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor)
     }
     

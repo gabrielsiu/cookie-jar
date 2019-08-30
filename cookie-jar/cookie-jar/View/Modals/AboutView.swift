@@ -34,13 +34,19 @@ final class AboutView: ModalPopupView {
     private let creditTextView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
-        
         let attributedString = NSMutableAttributedString(string: "Icons8 for all icons and app icon")
         let url = URL(string: "https://icons8.com")
         attributedString.setAttributes([.link: url!], range: NSMakeRange(0, 6))
         textView.attributedText = attributedString
         textView.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return textView
+    }()
+    
+    private let cookieMonsterImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "icons8-cookie-monster-144")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
     private lazy var topStack: UIStackView = {
@@ -52,7 +58,7 @@ final class AboutView: ModalPopupView {
     }()
     
     private lazy var bottomStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [thanksLabel, creditTextView])
+        let stackView = UIStackView(arrangedSubviews: [thanksLabel, creditTextView, cookieMonsterImageView])
         stackView.axis = .vertical
         stackView.spacing = 5
         return stackView

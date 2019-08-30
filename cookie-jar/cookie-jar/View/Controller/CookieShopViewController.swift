@@ -36,7 +36,7 @@ final class CookieShopViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.register(CookieCell.self, forCellWithReuseIdentifier: COOKIE_SHOP_ITEM_IDENTIFIER)
+        collectionView.register(CookieShopCell.self, forCellWithReuseIdentifier: COOKIE_SHOP_ITEM_IDENTIFIER)
         collectionView.backgroundColor = .white
         return collectionView
     }()
@@ -84,7 +84,7 @@ extension CookieShopViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: COOKIE_SHOP_ITEM_IDENTIFIER, for: indexPath) as? CookieCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: COOKIE_SHOP_ITEM_IDENTIFIER, for: indexPath) as? CookieShopCell {
             cell.setData(cookie: cookieShopViewModel.getCookies()[indexPath.row])
             return cell
         } else {

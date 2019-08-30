@@ -17,6 +17,7 @@ final class CookieShopViewModel {
         self.cookieService = cookieService
     }
     
+    // MARK: Methods
     func getCurrentPointsString() -> String {
         let numPoints = dataService.points
         return "Points: \(numPoints)"
