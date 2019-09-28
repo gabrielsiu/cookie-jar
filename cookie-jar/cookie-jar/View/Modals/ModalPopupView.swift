@@ -44,6 +44,7 @@ class ModalPopupView: UIView {
     
     // MARK: Animations
     @objc func animateIn() {
+        addKeyboardObserver()
         self.container.transform = CGAffineTransform(translationX: 0, y: -self.frame.height)
         self.alpha = 0
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
@@ -53,6 +54,7 @@ class ModalPopupView: UIView {
     }
     
     @objc func animateOut() {
+        removeKeyboardObserver()
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
             self.container.transform = CGAffineTransform(translationX: 0, y: -self.frame.height)
             self.alpha = 0
@@ -61,5 +63,26 @@ class ModalPopupView: UIView {
                 self.removeFromSuperview()
             }
         }
+    }
+    
+    // MARK: Keyboard
+    func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+
+    func removeKeyboardObserver() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+
+    @objc func keyboardWillChange(notification: Notification) {
+        let duration = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        let curve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
+        let curFrame = (notification.userInfo![UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let targetFrame = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let deltaY = targetFrame.origin.y - curFrame.origin.y
+
+        UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: UIView.KeyframeAnimationOptions(rawValue: curve), animations: {
+            self.frame.origin.y += (deltaY / 3)
+        })
     }
 }

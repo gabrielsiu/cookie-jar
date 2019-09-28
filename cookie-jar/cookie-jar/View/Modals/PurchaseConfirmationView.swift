@@ -23,7 +23,7 @@ final class PurchaseConfirmationView: ModalPopupView {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         return label
     }()
     

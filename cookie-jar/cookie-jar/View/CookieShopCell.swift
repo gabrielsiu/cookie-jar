@@ -18,12 +18,15 @@ final class CookieShopCell: UICollectionViewCell {
     private let name: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = label.font.withSize(14.0)
         return label
     }()
     
     private let points: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.font = label.font.withSize(14.0)
         return label
     }()
     

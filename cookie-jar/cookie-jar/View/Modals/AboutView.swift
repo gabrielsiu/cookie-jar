@@ -58,7 +58,7 @@ final class AboutView: ModalPopupView {
     }()
     
     private lazy var bottomStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [thanksLabel, creditTextView, cookieMonsterImageView])
+        let stackView = UIStackView(arrangedSubviews: [thanksLabel, creditTextView])
         stackView.axis = .vertical
         stackView.spacing = 5
         return stackView
