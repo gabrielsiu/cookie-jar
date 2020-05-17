@@ -1,11 +1,19 @@
-# Cookie Jar ![app_icon](https://raw.githubusercontent.com/gcsiu/cookie-jar/master/Screenshots/appicon.png)
-
+# Cookie Jar &nbsp;[<img src="screenshots/appicon.png">](icon)
 An iOS to-do list app that offers a points-based reward system
 
 ## Screenshots
+[<img src="screenshots/cookiejar-1.png" width="200" height="433">](screenshots/cookiejar-1.png)
+&nbsp;
+[<img src="screenshots/cookiejar-2.png" width="200" height="433">](screenshots/cookiejar-2.png)
+&nbsp;
+[<img src="screenshots/cookiejar-3.png" width="200" height="433">](screenshots/cookiejar-3.png)
+&nbsp;
+[<img src="screenshots/cookiejar-4.png" width="200" height="433">](screenshots/cookiejar-4.png)
 
-![to-do_list](https://raw.githubusercontent.com/gcsiu/cookie-jar/master/Screenshots/screenshot-todolist.png) ![add_to-do_view](https://raw.githubusercontent.com/gcsiu/cookie-jar/master/Screenshots/screenshot-addtodo.png) ![profile_view](https://raw.githubusercontent.com/gcsiu/cookie-jar/master/Screenshots/screenshot-profile.png) ![purchase_view](https://raw.githubusercontent.com/gcsiu/cookie-jar/master/Screenshots/screenshot-purchase.png)
+## Key Takeaways
+- MVVM Design Pattern
+- Dependency Injection
+- Creating views programmatically
 
-## Thanks to
-
-[Icons8](https://icons8.com/) for all icons
+## Acknowledgments
+Icons from [Icons8](https://icons8.com/)
