@@ -1,4 +1,4 @@
-# Cookie Jar &nbsp;[<img src="screenshots/appicon.png">](icon)
+# Cookie Jar &nbsp;[<img src="screenshots/icon.png">](icon)
 An iOS to-do list app that offers a points-based reward system
 
 ## Screenshots
